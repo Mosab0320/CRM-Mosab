@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OffPlan Pro — CRM العقارات</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #07090F;
+  --bg2:      #0D1018;
+  --bg3:      #111520;
+  --bg4:      #161C2C;
+  --card:     #0F1422;
+  --border:   rgba(255,255,255,0.07);
+  --border2:  rgba(255,255,255,0.12);
+  --gold:     #E2B96A;
+  --gold2:    #F5D08A;
+  --gold3:    #A07838;
+  --emerald:  #2DD4A0;
+  --sky:      #38C4F8;
+  --rose:     #F4506A;
+  --amber:    #F59E2B;
+  --violet:   #A78BFA;
+  --text:     #E8ECF5;
+  --text2:    #8896B0;
+  --text3:    #4A5570;
+  --glow:     rgba(226,185,106,0.12);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Tajawal',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+
+/* ── LAYOUT ── */
+.shell{display:flex;min-height:100vh;}
+
+/* ── SIDEBAR ── */
+.sidebar{
+  width:260px;background:var(--bg2);
+  border-left:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:fixed;top:0;right:0;height:100vh;
+  z-index:200;
+}
+.sb-logo{
+  padding:22px 20px 18px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.sb-logo-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:linear-gradient(135deg,var(--gold3),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.sb-logo-text{line-height:1.3;}
+.sb-logo-title{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:var(--gold);letter-spacing:.5px;}
+.sb-logo-sub{font-size:11px;color:var(--text3);}
+
+.sb-nav{padding:14px 12px;flex:1;overflow-y:auto;}
+.sb-section{font-size:10px;font-weight:800;color:var(--text3);letter-spacing:2px;padding:10px 10px 6px;text-transform:uppercase;}
+.nav-btn{
+  display:flex;align-items:center;gap:11px;
+  padding:10px 12px;border-radius:10px;cursor:pointer;
+  margin-bottom:2px;color:var(--text2);
+  font-size:13.5px;font-weight:500;
+  transition:.18s;border:1px solid transparent;
+  position:relative;
+}
+.nav-btn:hover{background:var(--bg3);color:var(--text);}
+.nav-btn.active{
+  background:linear-gradient(135deg,rgba(226,185,106,.14),rgba(226,185,106,.05));
+  color:var(--gold);border-color:rgba(226,185,106,.2);
+}
+.nav-btn.active::before{
+  content:'';position:absolute;right:0;top:20%;height:60%;
+  width:3px;background:var(--gold);border-radius:3px 0 0 3px;
+}
+.nav-icon{font-size:17px;width:22px;text-align:center;flex-shrink:0;}
+.nav-chip{
+  margin-right:auto;background:rgba(226,185,106,.18);
+  color:var(--gold);font-size:11px;font-weight:800;
+  padding:1px 8px;border-radius:20px;
+}
+.nav-chip.red{background:rgba(244,80,106,.18);color:var(--rose);}
+
+.sb-user{
+  padding:14px 16px;border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.sb-avatar{
+  width:36px;height:36px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold3),var(--gold2));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;color:var(--bg);font-size:14px;flex-shrink:0;
+}
+.sb-user-name{font-size:13px;font-weight:700;}
+.sb-user-role{font-size:11px;color:var(--text3);}
+
+/* ── TOPBAR ── */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(7,9,15,.85);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:14px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-left h2{font-size:21px;font-weight:800;color:var(--text);}
+.topbar-left p{font-size:12px;color:var(--text3);margin-top:1px;}
+.topbar-right{display:flex;gap:10px;align-items:center;}
+
+/* ── BUTTONS ── */
+.btn{
+  padding:9px 18px;border-radius:9px;border:none;cursor:pointer;
+  font-family:'Tajawal',sans-serif;font-weight:700;font-size:13px;
+  transition:.18s;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;
+}
+.btn-gold{background:linear-gradient(135deg,var(--gold3),var(--gold));color:var(--bg);}
+.btn-gold:hover{filter:brightness(1.1);transform:translateY(-1px);box-shadow:0 6px 24px rgba(226,185,106,.3);}
+.btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--text2);}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);background:var(--glow);}
+.btn-sm{padding:6px 13px;font-size:12px;}
+.btn-danger{background:rgba(244,80,106,.15);border:1px solid rgba(244,80,106,.3);color:var(--rose);}
+.btn-danger:hover{background:rgba(244,80,106,.25);}
+.btn-emerald{background:rgba(45,212,160,.15);border:1px solid rgba(45,212,160,.3);color:var(--emerald);}
+.btn-emerald:hover{background:rgba(45,212,160,.25);}
+
+/* ── MAIN ── */
+.main{margin-right:260px;flex:1;display:flex;flex-direction:column;}
+.content{padding:26px 28px;flex:1;}
+
+/* ── PAGES ── */
+.page{display:none;}
+.page.active{display:block;animation:slideIn .28s ease;}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── STAT CARDS ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+.stat-box{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:18px 20px;
+  position:relative;overflow:hidden;cursor:default;
+  transition:.2s;
+}
+.stat-box:hover{border-color:var(--border2);transform:translateY(-2px);}
+.stat-box::after{
+  content:'';position:absolute;
+  bottom:-20px;left:-20px;width:80px;height:80px;
+  border-radius:50%;opacity:.08;
+}
+.sb-gold::after{background:var(--gold);}
+.sb-emerald::after{background:var(--emerald);}
+.sb-sky::after{background:var(--sky);}
+.sb-rose::after{background:var(--rose);}
+.sb-violet::after{background:var(--violet);}
+.sb-amber::after{background:var(--amber);}
+.stat-label{font-size:11px;font-weight:700;color:var(--text3);margin-bottom:8px;letter-spacing:.3px;}
+.stat-val{font-size:26px;font-weight:900;line-height:1;}
+.sb-gold .stat-val{color:var(--gold);}
+.sb-emerald .stat-val{color:var(--emerald);}
+.sb-sky .stat-val{color:var(--sky);}
+.sb-rose .stat-val{color:var(--rose);}
+.sb-violet .stat-val{color:var(--violet);}
+.sb-amber .stat-val{color:var(--amber);}
+.stat-foot{font-size:11px;color:var(--text3);margin-top:5px;display:flex;align-items:center;gap:4px;}
+.stat-up{color:var(--emerald);font-weight:700;}
+.stat-down{color:var(--rose);font-weight:700;}
+
+/* ── CARDS ── */
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;}
+.card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.card-title{font-size:15px;font-weight:800;color:var(--text);}
+.card-sub{font-size:11px;color:var(--text3);margin-top:2px;}
+
+/* ── GRID LAYOUTS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+.g3{display:grid;grid-template-columns:2fr 1fr;gap:18px;margin-bottom:18px;}
+.g32{display:grid;grid-template-columns:1fr 2fr;gap:18px;margin-bottom:18px;}
+.g3eq{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px;}
+.mb18{margin-bottom:18px;}
+
+/* ── TABLE ── */
+.tbl-wrap{overflow-x:auto;}
+table{width:100%;border-collapse:collapse;}
+th{
+  text-align:right;padding:10px 14px;
+  font-size:11px;font-weight:800;color:var(--text3);
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;letter-spacing:.3px;text-transform:uppercase;
+}
+td{
+  padding:12px 14px;font-size:13px;
+  border-bottom:1px solid rgba(255,255,255,.03);
+  vertical-align:middle;
+}
+tr:last-child td{border-bottom:none;}
+tbody tr{transition:.15s;}
+tbody tr:hover td{background:rgba(255,255,255,.02);}
+
+/* ── BADGES ── */
+.badge{
+  display:inline-flex;align-items:center;padding:3px 10px;
+  border-radius:20px;font-size:11px;font-weight:800;white-space:nowrap;
+}
+.bg-emerald{background:rgba(45,212,160,.14);color:var(--emerald);}
+.bg-amber{background:rgba(245,158,43,.14);color:var(--amber);}
+.bg-rose{background:rgba(244,80,106,.14);color:var(--rose);}
+.bg-sky{background:rgba(56,196,248,.14);color:var(--sky);}
+.bg-gold{background:rgba(226,185,106,.14);color:var(--gold);}
+.bg-violet{background:rgba(167,139,250,.14);color:var(--violet);}
+.bg-muted{background:rgba(255,255,255,.06);color:var(--text2);}
+
+/* ── PROGRESS ── */
+.prog-track{background:var(--bg3);border-radius:20px;height:7px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:20px;transition:.6s cubic-bezier(.4,0,.2,1);}
+.pf-gold{background:linear-gradient(90deg,var(--gold3),var(--gold2));}
+.pf-emerald{background:linear-gradient(90deg,#059669,var(--emerald));}
+.pf-sky{background:linear-gradient(90deg,#0284C7,var(--sky));}
+.pf-violet{background:linear-gradient(90deg,#7C3AED,var(--violet));}
+.pf-rose{background:linear-gradient(90deg,#BE123C,var(--rose));}
+.pf-amber{background:linear-gradient(90deg,#B45309,var(--amber));}
+
+/* ── PIPELINE KANBAN ── */
+.kanban{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:20px;}
+.kan-col{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:12px;padding:13px;
+  min-height:280px;
+  transition:.2s;
+}
+.kan-col.drag-over{border-color:var(--gold);background:rgba(226,185,106,.04);}
+.kan-hd{
+  font-size:11px;font-weight:800;letter-spacing:.5px;
+  margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;
+}
+.kan-count{
+  background:var(--bg3);color:var(--text3);
+  font-size:11px;padding:1px 8px;border-radius:20px;
+}
+.lead-tile{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:9px;padding:11px;margin-bottom:8px;
+  cursor:grab;transition:.18s;
+  animation:tileIn .2s ease;
+}
+@keyframes tileIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.lead-tile:hover{border-color:var(--border2);transform:translateY(-1px);}
+.lead-tile:active{cursor:grabbing;}
+.tile-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+.tile-row{font-size:11px;color:var(--text3);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:4px;}
+.tile-budget{font-size:12px;color:var(--gold);font-weight:800;margin-top:5px;}
+.tile-hot{display:inline-block;font-size:10px;margin-top:4px;}
+
+/* ── AVATAR ── */
+.ava{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:var(--bg);
+}
+.ava-gold{background:linear-gradient(135deg,var(--gold3),var(--gold2));}
+.ava-sky{background:linear-gradient(135deg,#0284C7,var(--sky));}
+.ava-violet{background:linear-gradient(135deg,#7C3AED,var(--violet));}
+.ava-emerald{background:linear-gradient(135deg,#059669,var(--emerald));}
+
+/* ── GOAL TILE ── */
+.goal-tile{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:12px;padding:16px;margin-bottom:12px;
+}
+.goal-tile-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.goal-name{font-size:14px;font-weight:700;}
+.goal-pct{font-size:20px;font-weight:900;}
+
+/* ── ACTIVITY ── */
+.act-item{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,.03);
+}
+.act-item:last-child{border-bottom:none;}
+.act-dot{width:8px;height:8px;border-radius:50%;margin-top:5px;flex-shrink:0;}
+
+/* ── TASK CARD ── */
+.task-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:10px;padding:13px;margin-bottom:10px;
+  transition:.18s;
+}
+.task-card:hover{border-color:var(--border2);}
+.task-done{opacity:.45;border-color:rgba(255,255,255,.04)!important;}
+.task-hd{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;}
+.task-title{font-size:13px;font-weight:700;}
+.task-meta{font-size:11px;color:var(--text3);display:flex;gap:10px;flex-wrap:wrap;}
+
+/* ── PROPERTY CARD ── */
+.prop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.prop-card{
+  background:var(--bg3);border:1px solid var(--border);
+  border-radius:13px;overflow:hidden;
+  cursor:pointer;transition:.2s;
+}
+.prop-card:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3);}
+.prop-thumb{
+  height:110px;display:flex;align-items:center;justify-content:center;
+  font-size:42px;position:relative;
+}
+.prop-status-tag{
+  position:absolute;top:10px;right:10px;
+  font-size:10px;font-weight:800;padding:3px 9px;border-radius:20px;
+}
+.prop-body{padding:14px;}
+.prop-name{font-size:14px;font-weight:800;margin-bottom:3px;}
+.prop-loc{font-size:11px;color:var(--text3);margin-bottom:8px;display:flex;align-items:center;gap:4px;}
+.prop-price{font-size:16px;font-weight:900;color:var(--gold);}
+.prop-specs{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.prop-spec{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:700;}
+
+/* ── CHART BAR ── */
+.chart-bars{display:flex;align-items:flex-end;gap:10px;height:130px;}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;}
+.bar-fill{width:100%;border-radius:5px 5px 0 0;min-height:4px;transition:.6s cubic-bezier(.4,0,.2,1);}
+.bar-lbl{font-size:10px;color:var(--text3);}
+.bar-val{font-size:10px;color:var(--text2);margin-bottom:2px;}
+
+/* ── MODAL ── */
+.modal-bg{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);
+  z-index:400;display:none;justify-content:center;align-items:center;
+  backdrop-filter:blur(6px);
+}
+.modal-bg.open{display:flex;}
+.modal{
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:18px;padding:28px;
+  width:100%;max-width:560px;
+  max-height:90vh;overflow-y:auto;
+  animation:modalIn .25s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.modal-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;}
+.modal-title{font-size:18px;font-weight:900;color:var(--gold);}
+.modal-close{
+  background:var(--bg3);border:none;color:var(--text2);
+  width:32px;height:32px;border-radius:8px;cursor:pointer;
+  font-size:18px;display:flex;align-items:center;justify-content:center;
+  transition:.15s;
+}
+.modal-close:hover{background:var(--rose);color:#fff;}
+
+/* ── FORM ── */
+.fg{margin-bottom:14px;}
+.fg label{display:block;font-size:11px;font-weight:800;color:var(--text3);margin-bottom:5px;letter-spacing:.3px;text-transform:uppercase;}
+.fi{
+  width:100%;background:var(--bg3);
+  border:1px solid var(--border2);border-radius:9px;
+  padding:10px 14px;color:var(--text);
+  font-family:'Tajawal',sans-serif;font-size:13px;
+  outline:none;transition:.2s;
+}
+.fi:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(226,185,106,.1);}
+select.fi option{background:var(--bg2);}
+textarea.fi{resize:vertical;min-height:60px;}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.fr3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:4px;background:var(--bg3);border-radius:10px;padding:4px;margin-bottom:20px;width:fit-content;}
+.tab{padding:8px 18px;border-radius:7px;cursor:pointer;font-size:13px;font-weight:700;color:var(--text2);transition:.18s;}
+.tab.active{background:var(--bg4);color:var(--gold);}
+.tab:hover:not(.active){color:var(--text);}
+
+/* ── KPI ROW ── */
+.kpi-row{display:flex;gap:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+.kpi{flex:1;padding:14px 18px;border-left:1px solid var(--border);text-align:center;}
+.kpi:last-child{border-left:none;}
+.kpi-val{font-size:22px;font-weight:900;color:var(--gold);}
+.kpi-lbl{font-size:11px;color:var(--text3);margin-top:3px;}
+
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--border);margin:16px 0;}
+
+/* ── EMPTY STATE ── */
+.empty{text-align:center;padding:40px 20px;color:var(--text3);}
+.empty-icon{font-size:40px;margin-bottom:10px;}
+.empty-text{font-size:14px;}
+
+/* ── HEAT INDICATOR ── */
+.heat{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:700;}
+.heat-dot{width:7px;height:7px;border-radius:50%;}
+
+/* ── NOTIFICATION DOT ── */
+.notif-dot{width:8px;height:8px;background:var(--rose);border-radius:50%;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .kanban{grid-template-columns:repeat(3,1fr);}
+  .prop-grid{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:800px){
+  .sidebar{width:58px;}
+  .sb-logo-text,.nav-btn span:not(.nav-chip),.sb-user-name,.sb-user-role,.sb-logo-title,.sb-logo-sub{display:none;}
+  .main{margin-right:58px;}
+  .content{padding:16px;}
+  .g2,.g3,.g32,.g3eq{grid-template-columns:1fr;}
+  .kanban{grid-template-columns:1fr 1fr;}
+  .fr,.fr3{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <div class="sb-logo">
+    <div class="sb-logo-icon">🏗️</div>
+    <div class="sb-logo-text">
+      <div class="sb-logo-title">OffPlan Pro</div>
+      <div class="sb-logo-sub">نظام إدارة العقارات</div>
+    </div>
+  </div>
+
+  <nav class="sb-nav">
+    <div class="sb-section">الرئيسية</div>
+    <div class="nav-btn active" onclick="goto('dashboard',this)">
+      <span class="nav-icon">📊</span><span>الداشبورد</span>
+    </div>
+
+    <div class="sb-section">العملاء</div>
+    <div class="nav-btn" onclick="goto('leads',this)">
+      <span class="nav-icon">👥</span><span>الليدز والعملاء</span>
+      <span class="nav-chip" id="chip-leads">0</span>
+    </div>
+    <div class="nav-btn" onclick="goto('pipeline',this)">
+      <span class="nav-icon">🔄</span><span>Pipeline المبيعات</span>
+    </div>
+
+    <div class="sb-section">المشاريع</div>
+    <div class="nav-btn" onclick="goto('projects',this)">
+      <span class="nav-icon">🏗️</span><span>مشاريع الأوف بلان</span>
+    </div>
+    <div class="nav-btn" onclick="goto('units',this)">
+      <span class="nav-icon">🏠</span><span>الوحدات المتاحة</span>
+    </div>
+
+    <div class="sb-section">المالية</div>
+    <div class="nav-btn" onclick="goto('deals',this)">
+      <span class="nav-icon">💰</span><span>الصفقات والعمولات</span>
+    </div>
+    <div class="nav-btn" onclick="goto('goals',this)">
+      <span class="nav-icon">🎯</span><span>الأهداف والأداء</span>
+    </div>
+
+    <div class="sb-section">التنظيم</div>
+    <div class="nav-btn" onclick="goto('tasks',this)">
+      <span class="nav-icon">✅</span><span>المهام والمواعيد</span>
+      <span class="nav-chip red" id="chip-tasks">0</span>
+    </div>
+    <div class="nav-btn" onclick="goto('followups',this)">
+      <span class="nav-icon">📞</span><span>المتابعات</span>
+    </div>
+  </nav>
+
+  <div class="sb-user">
+    <div class="sb-avatar" id="sb-avatar-txt">ب</div>
+    <div>
+      <div class="sb-user-name" id="sb-broker-name">البروكر</div>
+      <div class="sb-user-role">أوف بلان • سمسار عقارات</div>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<main class="main">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <h2 id="page-heading">الداشبورد</h2>
+      <p id="page-sub">مرحباً — إليك ملخص أداءك اليوم</p>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-ghost btn-sm" onclick="openModal('m-task')">+ مهمة</button>
+      <button class="btn btn-ghost btn-sm" onclick="openModal('m-lead')">+ عميل</button>
+      <button class="btn btn-gold btn-sm" onclick="openModal('m-deal')">💰 صفقة جديدة</button>
+      <div style="position:relative;cursor:pointer;padding:4px" title="الإشعارات">
+        <span style="font-size:18px">🔔</span>
+        <div class="notif-dot" style="position:absolute;top:2px;left:2px"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+
+  <!-- ══════════ DASHBOARD ══════════ -->
+  <div class="page active" id="page-dashboard">
+
+    <div class="stats-row">
+      <div class="stat-box sb-gold">
+        <div class="stat-label">💰 عمولات الشهر</div>
+        <div class="stat-val" id="d-commission">0 ج.م</div>
+        <div class="stat-foot"><span class="stat-up" id="d-comm-growth">+0%</span> عن الشهر الماضي</div>
+      </div>
+      <div class="stat-box sb-emerald">
+        <div class="stat-label">🤝 صفقات مغلقة</div>
+        <div class="stat-val" id="d-deals">0</div>
+        <div class="stat-foot">هدف: <span id="d-deals-goal">—</span></div>
+      </div>
+      <div class="stat-box sb-sky">
+        <div class="stat-label">👥 ليدز نشطة</div>
+        <div class="stat-val" id="d-leads">0</div>
+        <div class="stat-foot">جديد اليوم: <span id="d-new-leads">0</span></div>
+      </div>
+      <div class="stat-box sb-rose">
+        <div class="stat-label">⚡ مهام متأخرة</div>
+        <div class="stat-val" id="d-overdue">0</div>
+        <div class="stat-foot">إجمالي المعلقة: <span id="d-pending">0</span></div>
+      </div>
+    </div>
+
+    <div class="g3">
+      <!-- Commission Chart -->
+      <div class="card">
+        <div class="card-hd">
+          <div>
+            <div class="card-title">📈 العمولات الشهرية</div>
+            <div class="card-sub">آخر 6 أشهر</div>
+          </div>
+        </div>
+        <div class="chart-bars" id="d-chart"></div>
+        <div style="display:flex;gap:6px;margin-top:10px" id="d-chart-lbl"></div>
+      </div>
+
+      <!-- Mini Goals -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="card-title">🎯 تقدم الأهداف</div>
+          <button class="btn btn-ghost btn-sm" onclick="goto('goals',null)">التفاصيل</button>
+        </div>
+        <div id="d-mini-goals"></div>
+      </div>
+    </div>
+
+    <div class="g2">
+      <!-- Hot Leads -->
+      <div class="card">
+        <div class="card-hd">
+          <div class="card-title">🔥 أهم الليدز</div>
+          <button class="btn btn-ghost btn-sm" onclick="goto('leads',null)">الكل</button>
+        </div>
+        <div id="d-hot-leads"></div>
+      </div>
+
+      <!-- Activity Feed -->
+      <div class="card">
+        <div class="card-hd"><div class="card-title">⚡ آخر الأنشطة</div></div>
+        <div id="d-activity"></div>
+      </div>
+    </div>
+
+    <!-- Upcoming Tasks -->
+    <div class="card">
+      <div class="card-hd">
+        <div class="card-title">📅 مواعيد اليوم والغد</div>
+        <button class="btn btn-ghost btn-sm" onclick="goto('tasks',null)">كل المهام</button>
+      </div>
+      <div id="d-upcoming-tasks" style="display:flex;gap:12px;flex-wrap:wrap"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ LEADS ══════════ -->
+  <div class="page" id="page-leads">
+    <div style="display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
+      <input class="fi" style="width:200px" placeholder="🔍 ابحث..." id="leads-search" oninput="renderLeads()">
+      <select class="fi" style="width:140px" id="leads-f-stage" onchange="renderLeads()">
+        <option value="">كل المراحل</option>
+        <option>ليد جديد</option><option>تم التواصل</option><option>معاينة</option>
+        <option>عرض سعر</option><option>تفاوض</option><option>تم الإغلاق</option>
+      </select>
+      <select class="fi" style="width:130px" id="leads-f-hot" onchange="renderLeads()">
+        <option value="">الكل</option>
+        <option value="hot">🔥 ساخن</option>
+        <option value="warm">🟡 دافئ</option>
+        <option value="cold">🔵 بارد</option>
+      </select>
+      <button class="btn btn-gold" onclick="openModal('m-lead')">+ عميل جديد</button>
+      <span style="margin-right:auto;color:var(--text3);font-size:12px" id="leads-count-lbl">— عميل</span>
+    </div>
+
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>العميل</th><th>الحرارة</th><th>النوع</th><th>المرحلة</th>
+            <th>الميزانية</th><th>المشروع المطلوب</th><th>المصدر</th>
+            <th>آخر تواصل</th><th>إجراءات</th>
+          </tr></thead>
+          <tbody id="leads-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ PIPELINE ══════════ -->
+  <div class="page" id="page-pipeline">
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px">
+      <span style="color:var(--text3);font-size:13px">اسحب العميل بين مراحل البيع</span>
+      <button class="btn btn-gold btn-sm" onclick="openModal('m-lead')" style="margin-right:auto">+ عميل جديد</button>
+    </div>
+
+    <div class="kpi-row" id="pipeline-kpis"></div>
+
+    <div class="kanban" id="kanban-board"></div>
+  </div>
+
+  <!-- ══════════ PROJECTS ══════════ -->
+  <div class="page" id="page-projects">
+    <div style="display:flex;gap:10px;margin-bottom:18px;align-items:center">
+      <button class="btn btn-gold" onclick="openModal('m-project')" style="margin-right:auto">+ مشروع جديد</button>
+    </div>
+    <div class="g3eq" id="projects-grid"></div>
+  </div>
+
+  <!-- ══════════ UNITS ══════════ -->
+  <div class="page" id="page-units">
+    <div style="display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap;align-items:center">
+      <select class="fi" style="width:150px" id="units-f-project" onchange="renderUnits()">
+        <option value="">كل المشاريع</option>
+      </select>
+      <select class="fi" style="width:130px" id="units-f-type" onchange="renderUnits()">
+        <option value="">كل الأنواع</option>
+        <option>شقة</option><option>دوبلكس</option><option>بنتهاوس</option>
+        <option>فيلا</option><option>تاون هاوس</option><option>مكتب</option>
+      </select>
+      <select class="fi" style="width:130px" id="units-f-status" onchange="renderUnits()">
+        <option value="">كل الحالات</option>
+        <option>متاح</option><option>محجوز</option><option>مباع</option>
+      </select>
+      <button class="btn btn-gold" onclick="openModal('m-unit')" style="margin-right:auto">+ وحدة جديدة</button>
+    </div>
+    <div class="prop-grid" id="units-grid"></div>
+  </div>
+
+  <!-- ══════════ DEALS ══════════ -->
+  <div class="page" id="page-deals">
+    <div class="stats-row" style="grid-template-columns:repeat(3,1fr);margin-bottom:20px">
+      <div class="stat-box sb-gold">
+        <div class="stat-label">💰 إجمالي العمولات</div>
+        <div class="stat-val" id="deals-total-comm">0 ج.م</div>
+        <div class="stat-foot">كل الصفقات المكتملة</div>
+      </div>
+      <div class="stat-box sb-emerald">
+        <div class="stat-label">🏆 أكبر صفقة</div>
+        <div class="stat-val" id="deals-max">0 ج.م</div>
+        <div class="stat-foot" id="deals-max-name">—</div>
+      </div>
+      <div class="stat-box sb-sky">
+        <div class="stat-label">📊 متوسط العمولة</div>
+        <div class="stat-val" id="deals-avg">0 ج.م</div>
+        <div class="stat-foot">لكل صفقة مكتملة</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:14px">
+      <select class="fi" style="width:140px" id="deals-f-status" onchange="renderDeals()">
+        <option value="">كل الحالات</option>
+        <option>جارية</option><option>مكتملة</option><option>ملغاة</option>
+      </select>
+      <button class="btn btn-gold" onclick="openModal('m-deal')" style="margin-right:auto">+ صفقة جديدة</button>
+    </div>
+
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>العميل</th><th>المشروع / الوحدة</th><th>نوع الصفقة</th>
+            <th>قيمة العقد</th><th>نسبة العمولة</th><th>العمولة</th>
+            <th>التاريخ</th><th>تاريخ الاستلام</th><th>الحالة</th>
+          </tr></thead>
+          <tbody id="deals-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ GOALS ══════════ -->
+  <div class="page" id="page-goals">
+    <div class="g2 mb18">
+      <div class="card">
+        <div class="card-hd">
+          <div>
+            <div class="card-title">📅 الأهداف الشهرية</div>
+            <div class="card-sub" id="goals-month-lbl">أبريل 2026</div>
+          </div>
+          <button class="btn btn-ghost btn-sm" onclick="openGoalsModal()">✏️ تعديل</button>
+        </div>
+        <div id="goals-monthly"></div>
+      </div>
+      <div class="card">
+        <div class="card-hd">
+          <div>
+            <div class="card-title">📆 الأهداف السنوية</div>
+            <div class="card-sub">2026</div>
+          </div>
+        </div>
+        <div id="goals-yearly"></div>
+      </div>
+    </div>
+
+    <div class="card mb18">
+      <div class="card-hd"><div class="card-title">📊 الأداء الشهري — 2026</div></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>الشهر</th><th>الليدز</th><th>الصفقات</th><th>العمولات</th><th>تحقيق الهدف</th>
+          </tr></thead>
+          <tbody id="perf-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="g2">
+      <div class="card">
+        <div class="card-hd"><div class="card-title">🏆 أفضل مصادر الليدز</div></div>
+        <div id="goals-sources"></div>
+      </div>
+      <div class="card">
+        <div class="card-hd"><div class="card-title">🏗️ أكثر المشاريع مبيعاً</div></div>
+        <div id="goals-top-projects"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ TASKS ══════════ -->
+  <div class="page" id="page-tasks">
+    <div style="display:flex;gap:10px;margin-bottom:18px;align-items:center">
+      <div class="tabs">
+        <div class="tab active" id="tab-pending" onclick="switchTaskTab('pending')">المعلقة</div>
+        <div class="tab" id="tab-done" onclick="switchTaskTab('done')">المكتملة</div>
+      </div>
+      <button class="btn btn-gold btn-sm" onclick="openModal('m-task')" style="margin-right:auto">+ مهمة جديدة</button>
+    </div>
+    <div class="g2">
+      <div id="tasks-pending-list"></div>
+      <div id="tasks-done-list"></div>
+    </div>
+  </div>
+
+  <!-- ══════════ FOLLOW-UPS ══════════ -->
+  <div class="page" id="page-followups">
+    <div style="margin-bottom:18px;display:flex;gap:10px;align-items:center">
+      <button class="btn btn-gold btn-sm" onclick="openModal('m-followup')" style="margin-right:auto">+ متابعة جديدة</button>
+    </div>
+    <div class="card">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr>
+            <th>العميل</th><th>نوع المتابعة</th><th>التاريخ</th><th>الملاحظات</th><th>الحالة</th><th>إجراء</th>
+          </tr></thead>
+          <tbody id="followups-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /content -->
+</main>
+</div><!-- /shell -->
+
+<!-- ═══════════════ MODALS ═══════════════ -->
+
+<!-- ADD LEAD -->
+<div class="modal-bg" id="m-lead">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">👥 عميل / ليد جديد</div>
+      <button class="modal-close" onclick="closeModal('m-lead')">✕</button>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>الاسم الكامل *</label><input class="fi" id="l-name" placeholder="أحمد محمد السيد"></div>
+      <div class="fg"><label>رقم الهاتف *</label><input class="fi" id="l-phone" placeholder="01XXXXXXXXX"></div>
+    </div>
+    <div class="fr3">
+      <div class="fg"><label>النوع</label><select class="fi" id="l-type"><option>مشتري</option><option>مستثمر</option><option>بائع</option></select></div>
+      <div class="fg"><label>الحرارة</label><select class="fi" id="l-heat"><option value="hot">🔥 ساخن</option><option value="warm">🟡 دافئ</option><option value="cold">🔵 بارد</option></select></div>
+      <div class="fg"><label>المرحلة</label><select class="fi" id="l-stage">
+        <option>ليد جديد</option><option>تم التواصل</option><option>معاينة</option>
+        <option>عرض سعر</option><option>تفاوض</option><option>تم الإغلاق</option>
+      </select></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>الميزانية (ج.م)</label><input class="fi" id="l-budget" type="number" placeholder="1500000"></div>
+      <div class="fg"><label>المشروع المطلوب</label><input class="fi" id="l-project" placeholder="مدينتي / الشيخ زايد..."></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>نوع الوحدة</label><select class="fi" id="l-unit-type">
+        <option>شقة</option><option>دوبلكس</option><option>بنتهاوس</option>
+        <option>فيلا</option><option>تاون هاوس</option><option>مكتب</option>
+      </select></div>
+      <div class="fg"><label>المصدر</label><select class="fi" id="l-source">
+        <option>فيسبوك</option><option>إنستغرام</option><option>توصية</option>
+        <option>موقع إلكتروني</option><option>واتساب</option><option>مباشر</option><option>تيك توك</option>
+      </select></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>الجنسية</label><input class="fi" id="l-nationality" placeholder="مصري"></div>
+      <div class="fg"><label>آخر تواصل</label><input class="fi" id="l-last-contact" type="date"></div>
+    </div>
+    <div class="fg"><label>ملاحظات</label><textarea class="fi" id="l-notes" placeholder="متطلبات العميل، تفضيلاته، ملاحظات مهمة..."></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('m-lead')">إلغاء</button>
+      <button class="btn btn-gold" onclick="saveLead()">✓ حفظ العميل</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD DEAL -->
+<div class="modal-bg" id="m-deal">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">💰 تسجيل صفقة جديدة</div>
+      <button class="modal-close" onclick="closeModal('m-deal')">✕</button>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>اسم العميل *</label><input class="fi" id="d-client"></div>
+      <div class="fg"><label>المشروع *</label><input class="fi" id="d-project"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>الوحدة / كود</label><input class="fi" id="d-unit"></div>
+      <div class="fg"><label>نوع الصفقة</label><select class="fi" id="d-type">
+        <option>بيع أوف بلان</option><option>بيع تسليم فوري</option><option>إعادة بيع</option>
+      </select></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>قيمة العقد (ج.م) *</label><input class="fi" id="d-value" type="number" oninput="calcDealComm()"></div>
+      <div class="fg"><label>نسبة العمولة %</label><input class="fi" id="d-comm-pct" type="number" value="3" oninput="calcDealComm()"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>العمولة الإجمالية</label><input class="fi" id="d-comm-total" readonly style="color:var(--gold);font-weight:900"></div>
+      <div class="fg"><label>حصتي من العمولة %</label><input class="fi" id="d-my-pct" type="number" value="100" oninput="calcDealComm()"></div>
+    </div>
+    <div class="fg"><label>صافي عمولتي</label><input class="fi" id="d-my-comm" readonly style="color:var(--emerald);font-weight:900;font-size:16px"></div>
+    <div class="fr">
+      <div class="fg"><label>تاريخ الصفقة</label><input class="fi" id="d-date" type="date"></div>
+      <div class="fg"><label>تاريخ استلام العمولة</label><input class="fi" id="d-collect-date" type="date"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>الحالة</label><select class="fi" id="d-status">
+        <option>جارية</option><option>مكتملة</option><option>ملغاة</option>
+      </select></div>
+      <div class="fg"><label>المرحلة التعاقدية</label><select class="fi" id="d-contract-stage">
+        <option>عقد مبدئي</option><option>دفع العربون</option><option>توقيع العقد النهائي</option>
+        <option>سداد كامل</option><option>تسجيل</option>
+      </select></div>
+    </div>
+    <div class="fg"><label>ملاحظات</label><textarea class="fi" id="d-notes" rows="2"></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('m-deal')">إلغاء</button>
+      <button class="btn btn-gold" onclick="saveDeal()">✓ حفظ الصفقة</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD TASK -->
+<div class="modal-bg" id="m-task">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">✅ مهمة / موعد جديد</div>
+      <button class="modal-close" onclick="closeModal('m-task')">✕</button>
+    </div>
+    <div class="fg"><label>عنوان المهمة *</label><input class="fi" id="t-title" placeholder="معاينة وحدة مع العميل X"></div>
+    <div class="fr3">
+      <div class="fg"><label>النوع</label><select class="fi" id="t-type">
+        <option>مكالمة</option><option>معاينة</option><option>اجتماع</option>
+        <option>متابعة</option><option>أوراق وعقود</option><option>تسجيل</option>
+      </select></div>
+      <div class="fg"><label>الأولوية</label><select class="fi" id="t-priority">
+        <option>عادية</option><option>مهمة</option><option>عاجلة</option>
+      </select></div>
+      <div class="fg"><label>مرتبط بعميل</label><input class="fi" id="t-client"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>التاريخ والوقت</label><input class="fi" id="t-date" type="datetime-local"></div>
+      <div class="fg"><label>المشروع المرتبط</label><input class="fi" id="t-project"></div>
+    </div>
+    <div class="fg"><label>ملاحظات</label><textarea class="fi" id="t-notes" rows="2"></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('m-task')">إلغاء</button>
+      <button class="btn btn-gold" onclick="saveTask()">✓ حفظ المهمة</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD PROJECT -->
+<div class="modal-bg" id="m-project">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">🏗️ مشروع أوف بلان جديد</div>
+      <button class="modal-close" onclick="closeModal('m-project')">✕</button>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>اسم المشروع *</label><input class="fi" id="p-name"></div>
+      <div class="fg"><label>اسم المطور</label><input class="fi" id="p-developer"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>الموقع / المنطقة</label><input class="fi" id="p-location"></div>
+      <div class="fg"><label>تاريخ التسليم</label><input class="fi" id="p-delivery" type="date"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>سعر الوحدة من (ج.م)</label><input class="fi" id="p-price-from" type="number"></div>
+      <div class="fg"><label>سعر الوحدة إلى (ج.م)</label><input class="fi" id="p-price-to" type="number"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>نسبة المقدم %</label><input class="fi" id="p-down" type="number" value="10"></div>
+      <div class="fg"><label>مدة التقسيط (سنة)</label><input class="fi" id="p-years" type="number" value="8"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>عمولة البروكر %</label><input class="fi" id="p-comm" type="number" value="3"></div>
+      <div class="fg"><label>الحالة</label><select class="fi" id="p-status">
+        <option>نشط</option><option>منتهي</option><option>قادم</option>
+      </select></div>
+    </div>
+    <div class="fg"><label>وصف / مميزات</label><textarea class="fi" id="p-desc" rows="2" placeholder="نظام إلكتروني، حمام سباحة، جيم..."></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('m-project')">إلغاء</button>
+      <button class="btn btn-gold" onclick="saveProject()">✓ حفظ المشروع</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD UNIT -->
+<div class="modal-bg" id="m-unit">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">🏠 وحدة جديدة</div>
+      <button class="modal-close" onclick="closeModal('m-unit')">✕</button>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>كود الوحدة *</label><input class="fi" id="u-code" placeholder="A-204"></div>
+      <div class="fg"><label>المشروع</label>
+        <select class="fi" id="u-project-sel"></select>
+      </div>
+    </div>
+    <div class="fr3">
+      <div class="fg"><label>النوع</label><select class="fi" id="u-type">
+        <option>شقة</option><option>دوبلكس</option><option>بنتهاوس</option>
+        <option>فيلا</option><option>تاون هاوس</option><option>مكتب</option>
+      </select></div>
+      <div class="fg"><label>المساحة (م²)</label><input class="fi" id="u-area" type="number"></div>
+      <div class="fg"><label>الغرف</label><input class="fi" id="u-rooms" type="number" placeholder="3"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>السعر الإجمالي (ج.م)</label><input class="fi" id="u-price" type="number"></div>
+      <div class="fg"><label>الحالة</label><select class="fi" id="u-status">
+        <option>متاح</option><option>محجوز</option><option>مباع</option>
+      </select></div>
+    </div>
+    <div class="fg"><label>الطابق / إطلالة / مميزات</label><input class="fi" id="u-desc" placeholder="طابق 5 - إطلالة حديقة"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('m-unit')">إلغاء</button>
+      <button class="btn btn-gold" onclick="saveUnit()">✓ حفظ الوحدة</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD FOLLOW-UP -->
+<div class="modal-bg" id="m-followup">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">📞 متابعة جديدة</div>
+      <button class="modal-close" onclick="closeModal('m-followup')">✕</button>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>العميل *</label><input class="fi" id="fu-client"></div>
+      <div class="fg"><label>نوع المتابعة</label><select class="fi" id="fu-type">
+        <option>مكالمة هاتفية</option><option>واتساب</option><option>زيارة</option>
+        <option>إيميل</option><option>اجتماع</option>
+      </select></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>تاريخ المتابعة</label><input class="fi" id="fu-date" type="date"></div>
+      <div class="fg"><label>الموعد التالي</label><input class="fi" id="fu-next" type="date"></div>
+    </div>
+    <div class="fg"><label>ملاحظات</label><textarea class="fi" id="fu-notes" rows="3" placeholder="نتيجة المتابعة، ردود العميل، الخطوة القادمة..."></textarea></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('m-followup')">إلغاء</button>
+      <button class="btn btn-gold" onclick="saveFollowup()">✓ حفظ المتابعة</button>
+    </div>
+  </div>
+</div>
+
+<!-- GOALS EDIT -->
+<div class="modal-bg" id="m-goals">
+  <div class="modal">
+    <div class="modal-hd">
+      <div class="modal-title">🎯 تحديد الأهداف</div>
+      <button class="modal-close" onclick="closeModal('m-goals')">✕</button>
+    </div>
+    <div style="color:var(--text3);font-size:12px;margin-bottom:14px">الأهداف الشهرية</div>
+    <div class="fr">
+      <div class="fg"><label>عدد الصفقات</label><input class="fi" id="g-deals-m" type="number"></div>
+      <div class="fg"><label>العمولات (ج.م)</label><input class="fi" id="g-comm-m" type="number"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>الليدز الجدد</label><input class="fi" id="g-leads-m" type="number"></div>
+      <div class="fg"><label>المعاينات</label><input class="fi" id="g-visits-m" type="number"></div>
+    </div>
+    <div class="divider"></div>
+    <div style="color:var(--text3);font-size:12px;margin-bottom:14px">الأهداف السنوية</div>
+    <div class="fr">
+      <div class="fg"><label>عدد الصفقات</label><input class="fi" id="g-deals-y" type="number"></div>
+      <div class="fg"><label>العمولات (ج.م)</label><input class="fi" id="g-comm-y" type="number"></div>
+    </div>
+    <div class="fr">
+      <div class="fg"><label>اسم البروكر</label><input class="fi" id="g-broker-name" placeholder="اسمك"></div>
+      <div class="fg"><label>المتابعات الشهرية</label><input class="fi" id="g-followups-m" type="number"></div>
+    </div>
+    <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
+      <button class="btn btn-ghost" onclick="closeModal('m-goals')">إلغاء</button>
+      <button class="btn btn-gold" onclick="saveGoals()">✓ حفظ الأهداف</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SCRIPT ═══════════════ -->
+<script>
+// ──────────── DATA STORE ────────────
+let DB = JSON.parse(localStorage.getItem('offplan_crm_v3') || 'null') || {
+  leads:[
+    {id:1,name:'محمد خالد النجار',phone:'01001234567',type:'مشتري',heat:'hot',stage:'معاينة',budget:2500000,project:'مدينتي - Q',unitType:'فيلا',source:'فيسبوك',nationality:'مصري',lastContact:'2026-04-03',notes:'يريد فيلا مع حديقة، جاهز للتفاوض',date:'2026-04-01'},
+    {id:2,name:'سارة أحمد رضا',phone:'01112345678',type:'مستثمر',heat:'hot',stage:'عرض سعر',budget:4000000,project:'الشيخ زايد - Z5',unitType:'دوبلكس',source:'توصية',nationality:'مصري',lastContact:'2026-04-04',notes:'تبحث عن عائد إيجاري مرتفع',date:'2026-04-02'},
+    {id:3,name:'كريم عبدالله فتحي',phone:'01234567890',type:'مشتري',heat:'warm',stage:'تم التواصل',budget:1800000,project:'أي مشروع قريب',unitType:'شقة',source:'إنستغرام',nationality:'مصري',lastContact:'2026-04-02',notes:'',date:'2026-04-03'},
+    {id:4,name:'منى سمير عوض',phone:'01098765432',type:'مشتري',heat:'cold',stage:'ليد جديد',budget:3000000,project:'التجمع الخامس',unitType:'بنتهاوس',source:'موقع إلكتروني',nationality:'خليجي',lastContact:'2026-03-28',notes:'لم يرد على المكالمات',date:'2026-04-04'},
+    {id:5,name:'أحمد حسن طارق',phone:'01187654321',type:'مستثمر',heat:'warm',stage:'تفاوض',budget:6000000,project:'العلمين الجديدة',unitType:'شقة',source:'واتساب',nationality:'مصري',lastContact:'2026-04-04',notes:'يريد شقتين',date:'2026-03-30'},
+    {id:6,name:'دينا محمود سلام',phone:'01278901234',type:'مشتري',heat:'hot',stage:'تم الإغلاق',budget:1500000,project:'أكتوبر - M1',unitType:'شقة',source:'فيسبوك',nationality:'مصري',lastContact:'2026-04-01',notes:'تم الإغلاق بنجاح',date:'2026-03-25'},
+  ],
+  deals:[
+    {id:1,client:'دينا محمود سلام',project:'أكتوبر - M1',unit:'A-304',type:'بيع أوف بلان',value:1500000,commPct:3,commTotal:45000,myPct:100,myComm:45000,date:'2026-04-01',collectDate:'2026-05-01',status:'مكتملة',contractStage:'توقيع العقد النهائي',notes:''},
+    {id:2,client:'أميرة طارق',project:'الشيخ زايد Z5',unit:'B-101',type:'بيع أوف بلان',value:3800000,commPct:3,commTotal:114000,myPct:50,myComm:57000,date:'2026-03-15',collectDate:'2026-04-15',status:'مكتملة',contractStage:'سداد كامل',notes:'شراكة مع بروكر آخر'},
+    {id:3,client:'أحمد حسن طارق',project:'العلمين الجديدة',unit:'C-502',type:'بيع أوف بلان',value:2800000,commPct:3,commTotal:84000,myPct:100,myComm:84000,date:'2026-04-03',collectDate:'',status:'جارية',contractStage:'عقد مبدئي',notes:'في انتظار التحويل'},
+  ],
+  projects:[
+    {id:1,name:'مدينتي - Q',developer:'المجموعة العربية',location:'مدينتي',delivery:'2027-12-01',priceFrom:2000000,priceTo:8000000,down:10,years:8,comm:3,status:'نشط',desc:'فيلات وتاون هاوس - حمام سباحة وجيم ونادي رياضي'},
+    {id:2,name:'الشيخ زايد Z5',developer:'تطوير مصر',location:'الشيخ زايد',delivery:'2028-06-01',priceFrom:3000000,priceTo:12000000,down:15,years:10,comm:3,status:'نشط',desc:'مشروع متكامل - مول تجاري داخلي'},
+    {id:3,name:'أكتوبر M1',developer:'الإسكان والتعمير',location:'6 أكتوبر',delivery:'2026-06-01',priceFrom:1200000,priceTo:3500000,down:10,years:7,comm:2.5,status:'نشط',desc:'شقق وأدوبلكس - تسليم قريب'},
+    {id:4,name:'العلمين الجديدة',developer:'العاصمة للتطوير',location:'العلمين',delivery:'2028-12-01',priceFrom:2500000,priceTo:15000000,down:20,years:10,comm:4,status:'نشط',desc:'ساحلي - إطلالة بحرية'},
+  ],
+  units:[
+    {id:1,code:'A-204',project:'مدينتي - Q',type:'فيلا',area:320,rooms:4,price:5500000,status:'متاح',desc:'طابق أرضي + أول - حديقة خاصة'},
+    {id:2,code:'B-101',project:'الشيخ زايد Z5',type:'دوبلكس',area:250,rooms:4,price:4200000,status:'مباع',desc:'طابق 1+2 - إطلالة حديقة'},
+    {id:3,code:'C-502',project:'العلمين الجديدة',type:'شقة',area:150,rooms:3,price:2800000,status:'محجوز',desc:'طابق 5 - إطلالة بحرية'},
+    {id:4,code:'D-301',project:'أكتوبر M1',type:'شقة',area:130,rooms:3,price:1800000,status:'متاح',desc:''},
+    {id:5,code:'E-705',project:'العلمين الجديدة',type:'بنتهاوس',area:400,rooms:5,price:12000000,status:'متاح',desc:'روف - إطلالة 360'},
+  ],
+  tasks:[
+    {id:1,title:'معاينة فيلا مع محمد النجار',type:'معاينة',priority:'عاجلة',date:'2026-04-06T10:00',client:'محمد خالد النجار',project:'مدينتي - Q',notes:'',done:false},
+    {id:2,title:'إرسال عرض السعر لسارة رضا',type:'أوراق وعقود',priority:'مهمة',date:'2026-04-05T14:00',client:'سارة أحمد رضا',project:'الشيخ زايد Z5',notes:'',done:false},
+    {id:3,title:'متابعة أحمد حسن - التحويل البنكي',type:'متابعة',priority:'عاجلة',date:'2026-04-05T11:00',client:'أحمد حسن طارق',project:'العلمين',notes:'',done:false},
+    {id:4,title:'مكالمة كريم فتحي',type:'مكالمة',priority:'عادية',date:'2026-04-07T09:00',client:'كريم عبدالله فتحي',project:'',notes:'',done:false},
+    {id:5,title:'اجتماع مطور مدينتي - الحصص الجديدة',type:'اجتماع',priority:'مهمة',date:'2026-04-08T13:00',client:'',project:'مدينتي - Q',notes:'',done:true},
+  ],
+  followups:[
+    {id:1,client:'منى سمير عوض',type:'مكالمة هاتفية',date:'2026-04-04',nextDate:'2026-04-07',notes:'لم ترد - أعيد المحاولة',status:'pending'},
+    {id:2,client:'كريم عبدالله فتحي',type:'واتساب',date:'2026-04-03',nextDate:'2026-04-06',notes:'أرسلت كتالوج المشاريع - ينتظر الرد',status:'pending'},
+    {id:3,client:'دينا محمود سلام',type:'مكالمة هاتفية',date:'2026-04-01',nextDate:'',notes:'تم الإغلاق بنجاح 🎉',status:'done'},
+  ],
+  goals:{
+    dealsM:5, commM:200000, leadsM:30, visitsM:15, followupsM:50,
+    dealsY:50, commY:2000000,
+    brokerName:''
+  },
+  activities:[
+    {text:'تم تسجيل صفقة: دينا محمود - أكتوبر M1',color:'#E2B96A',time:'منذ 3 أيام'},
+    {text:'ليد جديد: منى سمير عوض من الموقع الإلكتروني',color:'#38C4F8',time:'منذ يوم'},
+    {text:'مرحلة محدّثة: أحمد حسن ← تفاوض',color:'#A78BFA',time:'منذ يوم'},
+    {text:'معاينة مجدولة: محمد النجار - مدينتي',color:'#F59E2B',time:'منذ ساعة'},
+    {text:'صفقة مكتملة: أميرة طارق - الشيخ زايد 💰',color:'#2DD4A0',time:'منذ 20 يوم'},
+  ],
+  nid:20,
+};
+
+function save(){localStorage.setItem('offplan_crm_v3',JSON.stringify(DB));}
+
+// ──────────── NAVIGATION ────────────
+const headings = {
+  dashboard:'الداشبورد',leads:'الليدز والعملاء',pipeline:'Pipeline المبيعات',
+  projects:'مشاريع الأوف بلان',units:'الوحدات المتاحة',deals:'الصفقات والعمولات',
+  goals:'الأهداف والأداء',tasks:'المهام والمواعيد',followups:'سجل المتابعات',
+};
+const subs = {
+  dashboard:'مرحباً — إليك ملخص أداءك اليوم',
+  leads:'إدارة كاملة لعملائك وليدزك',
+  pipeline:'تتبع مراحل البيع بصريًا',
+  projects:'مشاريع الأوف بلان التي تسوق لها',
+  units:'الوحدات المتاحة في كل مشروع',
+  deals:'سجل كل صفقاتك وعمولاتك',
+  goals:'تتبع أهدافك وقياس أدائك',
+  tasks:'لا تنسى أي موعد أو مهمة',
+  followups:'سجل كل تواصل مع عملائك',
+};
+
+function goto(page, el){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.getElementById('page-heading').textContent = headings[page]||page;
+  document.getElementById('page-sub').textContent = subs[page]||'';
+  if(el) el.classList.add('active');
+  else {
+    document.querySelectorAll('.nav-btn').forEach(b=>{
+      if(b.getAttribute('onclick')?.includes("'"+page+"'")) b.classList.add('active');
+    });
+  }
+  render(page);
+}
+
+function render(p){
+  const map={dashboard:renderDashboard,leads:renderLeads,pipeline:renderPipeline,
+    projects:renderProjects,units:renderUnits,deals:renderDeals,
+    goals:renderGoals,tasks:renderTasks,followups:renderFollowups};
+  if(map[p]) map[p]();
+}
+
+// ──────────── HELPERS ────────────
+const fmt = n => (n||0).toLocaleString('ar-EG');
+const fmtShort = n => n>=1e6?(n/1e6).toFixed(1)+'م' : n>=1000?Math.round(n/1000)+'ك' : n;
+const fmtDate = d => d ? new Date(d).toLocaleDateString('ar-EG',{month:'short',day:'numeric'}) : '—';
+const fmtDT = d => d ? new Date(d).toLocaleDateString('ar-EG',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}) : '—';
+const nowStr = () => new Date().toISOString().split('T')[0];
+
+function addAct(text,color){
+  DB.activities.unshift({text,color,time:'الآن'});
+  if(DB.activities.length>30) DB.activities.pop();
+  save();
+}
+
+const stageColor = s=>({
+  'ليد جديد':'bg-sky','تم التواصل':'bg-violet','معاينة':'bg-amber',
+  'عرض سعر':'bg-gold','تفاوض':'bg-rose','تم الإغلاق':'bg-emerald'
+}[s]||'bg-muted');
+
+const heatHTML = h => ({
+  hot:`<span class="heat"><span class="heat-dot" style="background:var(--rose)"></span>ساخن</span>`,
+  warm:`<span class="heat"><span class="heat-dot" style="background:var(--amber)"></span>دافئ</span>`,
+  cold:`<span class="heat"><span class="heat-dot" style="background:var(--sky)"></span>بارد</span>`,
+}[h]||'');
+
+const prioColor = p=>({عادية:'bg-sky',مهمة:'bg-amber',عاجلة:'bg-rose'}[p]||'bg-muted');
+const taskIcon = t=>({مكالمة:'📞',معاينة:'🏠',اجتماع:'👥',متابعة:'🔄','أوراق وعقود':'📄',تسجيل:'📝'}[t]||'📌');
+
+function progBar(pct,cls){
+  return `<div class="prog-track"><div class="prog-fill ${cls}" style="width:${Math.min(100,pct)}%"></div></div>`;
+}
+function goalCard(label,cur,target,unit,cls,icon){
+  const pct = Math.min(100,Math.round((cur||0)/(target||1)*100));
+  const col = pct>=100?'var(--emerald)':pct>=60?'var(--gold)':'var(--rose)';
+  return `<div class="goal-tile">
+    <div class="goal-tile-hd">
+      <div class="goal-name">${icon} ${label}</div>
+      <div class="goal-pct" style="color:${col}">${pct}%</div>
+    </div>
+    ${progBar(pct,cls)}
+    <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-top:5px">
+      <span>الحالي: ${unit==='ج.م'?fmt(cur):cur} ${unit}</span>
+      <span>الهدف: ${unit==='ج.م'?fmt(target):target} ${unit}</span>
+    </div>
+  </div>`;
+}
+
+// ──────────── DASHBOARD ────────────
+function renderDashboard(){
+  const now = new Date();
+  const m = now.getMonth(), y = now.getFullYear();
+  const mDeals = DB.deals.filter(d=>{const dd=new Date(d.date);return dd.getMonth()===m&&dd.getFullYear()===y&&d.status==='مكتملة';});
+  const mComm = mDeals.reduce((s,d)=>s+d.myComm,0);
+  const prevComm = 117000; // mock
+  const growth = prevComm?Math.round((mComm-prevComm)/prevComm*100):0;
+
+  document.getElementById('d-commission').textContent = fmt(mComm)+' ج.م';
+  document.getElementById('d-comm-growth').textContent = (growth>=0?'+':'')+growth+'%';
+  document.getElementById('d-comm-growth').className = growth>=0?'stat-up':'stat-down';
+  document.getElementById('d-deals').textContent = mDeals.length;
+  document.getElementById('d-deals-goal').textContent = DB.goals.dealsM+' صفقة';
+  const active = DB.leads.filter(l=>l.stage!=='تم الإغلاق').length;
+  document.getElementById('d-leads').textContent = active;
+  const todayLeads = DB.leads.filter(l=>l.date===nowStr()).length;
+  document.getElementById('d-new-leads').textContent = todayLeads;
+  const overdue = DB.tasks.filter(t=>!t.done&&new Date(t.date)<now).length;
+  const pending = DB.tasks.filter(t=>!t.done).length;
+  document.getElementById('d-overdue').textContent = overdue;
+  document.getElementById('d-pending').textContent = pending;
+
+  // Update chips
+  document.getElementById('chip-leads').textContent = active;
+  document.getElementById('chip-tasks').textContent = overdue||pending;
+
+  // Chart
+  const months=['نوف','ديس','يناير','فبراير','مارس','أبريل'];
+  const vals=[68000,117000,95000,145000,82000,mComm||0];
+  const mx=Math.max(...vals)||1;
+  document.getElementById('d-chart').innerHTML = months.map((mo,i)=>`
+    <div class="bar-col">
+      <div class="bar-val">${fmtShort(vals[i])}</div>
+      <div class="bar-fill pf-gold" style="height:${Math.round(vals[i]/mx*100)}%;background:${i===5?'linear-gradient(180deg,var(--gold2),var(--gold3))':'linear-gradient(180deg,rgba(226,185,106,.6),rgba(160,120,56,.6))'}"></div>
+    </div>
+  `).join('');
+  document.getElementById('d-chart-lbl').innerHTML = months.map(mo=>`<div style="flex:1;text-align:center;font-size:10px;color:var(--text3)">${mo}</div>`).join('');
+
+  // Mini Goals
+  const g=DB.goals;
+  document.getElementById('d-mini-goals').innerHTML = [
+    {label:'الصفقات',cur:mDeals.length,target:g.dealsM,unit:'صفقة',cls:'pf-gold',icon:'🤝'},
+    {label:'العمولات',cur:mComm,target:g.commM,unit:'ج.م',cls:'pf-emerald',icon:'💰'},
+    {label:'الليدز',cur:DB.leads.length,target:g.leadsM,unit:'ليد',cls:'pf-sky',icon:'👥'},
+  ].map(x=>goalCard(x.label,x.cur,x.target,x.unit,x.cls,x.icon)).join('');
+
+  // Hot leads
+  const hot = DB.leads.filter(l=>l.heat==='hot'&&l.stage!=='تم الإغلاق').slice(0,4);
+  document.getElementById('d-hot-leads').innerHTML = hot.length ? hot.map(l=>`
+    <div class="act-item">
+      <div class="ava ava-gold">${l.name[0]}</div>
+      <div style="flex:1">
+        <div style="font-size:13px;font-weight:700">${l.name}</div>
+        <div style="font-size:11px;color:var(--text3)">${l.type} • ${l.project||'أي مشروع'} • <span class="badge ${stageColor(l.stage)}" style="padding:1px 6px">${l.stage}</span></div>
+      </div>
+      <div style="text-align:left"><div style="font-size:13px;font-weight:900;color:var(--gold)">${fmtShort(l.budget)}</div></div>
+    </div>
+  `).join('') : '<div class="empty"><div class="empty-icon">🔥</div><div class="empty-text">لا توجد ليدز ساخنة حالياً</div></div>';
+
+  // Activity
+  document.getElementById('d-activity').innerHTML = DB.activities.slice(0,5).map(a=>`
+    <div class="act-item">
+      <div class="act-dot" style="background:${a.color}"></div>
+      <div style="flex:1"><div style="font-size:13px">${a.text}</div><div style="font-size:11px;color:var(--text3)">${a.time}</div></div>
+    </div>
+  `).join('');
+
+  // Upcoming tasks
+  const upcoming = DB.tasks.filter(t=>!t.done).sort((a,b)=>new Date(a.date)-new Date(b.date)).slice(0,5);
+  document.getElementById('d-upcoming-tasks').innerHTML = upcoming.length ? upcoming.map(t=>`
+    <div style="background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:11px 14px;min-width:180px">
+      <div style="font-size:11px;color:var(--text3)">${fmtDT(t.date)}</div>
+      <div style="font-size:13px;font-weight:700;margin:3px 0">${taskIcon(t.type)} ${t.title}</div>
+      ${t.client?`<div style="font-size:11px;color:var(--text3)">👤 ${t.client}</div>`:''}
+      <span class="badge ${prioColor(t.priority)}" style="margin-top:6px">${t.priority}</span>
+    </div>
+  `).join('') : '<div style="color:var(--text3);font-size:13px;padding:10px">لا توجد مهام قادمة 🎉</div>';
+
+  // Update broker name in sidebar
+  if(DB.goals.brokerName){
+    document.getElementById('sb-broker-name').textContent = DB.goals.brokerName;
+    document.getElementById('sb-avatar-txt').textContent = DB.goals.brokerName[0];
+  }
+}
+
+// ──────────── LEADS ────────────
+function renderLeads(){
+  const q=(document.getElementById('leads-search')?.value||'').toLowerCase();
+  const fs=document.getElementById('leads-f-stage')?.value||'';
+  const fh=document.getElementById('leads-f-hot')?.value||'';
+  const leads=DB.leads.filter(l=>
+    (!q||l.name.toLowerCase().includes(q)||l.phone.includes(q)) &&
+    (!fs||l.stage===fs) &&
+    (!fh||l.heat===fh)
+  );
+  document.getElementById('leads-count-lbl').textContent = leads.length+' عميل';
+  document.getElementById('leads-tbody').innerHTML = leads.map(l=>`
+    <tr>
+      <td>
+        <div style="display:flex;align-items:center;gap:9px">
+          <div class="ava ava-${l.heat==='hot'?'gold':l.heat==='warm'?'amber':'sky'}" style="width:30px;height:30px;font-size:11px">${l.name[0]}</div>
+          <div>
+            <div style="font-weight:700">${l.name}</div>
+            <div style="font-size:11px;color:var(--text3);direction:ltr">${l.phone}</div>
+          </div>
+        </div>
+      </td>
+      <td>${heatHTML(l.heat)}</td>
+      <td><span class="badge bg-sky">${l.type}</span></td>
+      <td><span class="badge ${stageColor(l.stage)}">${l.stage}</span></td>
+      <td style="color:var(--gold);font-weight:700">${fmt(l.budget)}</td>
+      <td style="font-size:12px">${l.project||'—'}</td>
+      <td><span class="badge bg-muted">${l.source}</span></td>
+      <td style="color:var(--text3);font-size:12px">${fmtDate(l.lastContact)}</td>
+      <td>
+        <div style="display:flex;gap:6px">
+          <button class="btn btn-ghost btn-sm" onclick="advanceLead(${l.id})" title="التالي">→</button>
+          <button class="btn btn-emerald btn-sm" onclick="openFollowupForLead(${l.id})">📞</button>
+          <button class="btn btn-danger btn-sm" onclick="deleteLead(${l.id})">✕</button>
+        </div>
+      </td>
+    </tr>
+  `).join('') || '<tr><td colspan="9"><div class="empty"><div class="empty-icon">👥</div><div class="empty-text">لا توجد عملاء</div></div></td></tr>';
+}
+
+// ──────────── PIPELINE ────────────
+const STAGES=['ليد جديد','تم التواصل','معاينة','عرض سعر','تفاوض','تم الإغلاق'];
+const S_COLORS=['#38C4F8','#A78BFA','#F59E2B','#E2B96A','#F4506A','#2DD4A0'];
+
+function renderPipeline(){
+  // KPIs
+  const kpis = STAGES.map((s,i)=>{
+    const n=DB.leads.filter(l=>l.stage===s).length;
+    const v=DB.leads.filter(l=>l.stage===s).reduce((a,l)=>a+l.budget,0);
+    return `<div class="kpi">
+      <div class="kpi-val" style="color:${S_COLORS[i]}">${n}</div>
+      <div class="kpi-lbl">${s}</div>
+      <div style="font-size:10px;color:var(--text3);margin-top:2px">${fmtShort(v)} ج.م</div>
+    </div>`;
+  });
+  document.getElementById('pipeline-kpis').innerHTML = kpis.join('');
+
+  document.getElementById('kanban-board').innerHTML = STAGES.map((stage,i)=>{
+    const leads=DB.leads.filter(l=>l.stage===stage);
+    return `<div class="kan-col" id="kcol-${i}"
+      ondragover="event.preventDefault();this.classList.add('drag-over')"
+      ondragleave="this.classList.remove('drag-over')"
+      ondrop="dropLead(event,'${stage}',this)">
+      <div class="kan-hd" style="color:${S_COLORS[i]}">${stage}<span class="kan-count">${leads.length}</span></div>
+      ${leads.map(l=>`
+        <div class="lead-tile" draggable="true" ondragstart="dragStart(event,${l.id})">
+          <div class="tile-name">${l.name}</div>
+          <div class="tile-row"><span>${l.type}</span><span>•</span><span>${l.nationality}</span></div>
+          <div class="tile-row"><span>📍 ${l.project||'مرن'}</span></div>
+          <div class="tile-budget">${fmt(l.budget)} ج.م</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:5px">
+            ${heatHTML(l.heat)}
+            <span style="font-size:10px;color:var(--text3)">${fmtDate(l.lastContact)}</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>`;
+  }).join('');
+}
+
+let dragId=null;
+function dragStart(e,id){dragId=id;}
+function dropLead(e,stage,col){
+  col.classList.remove('drag-over');
+  if(!dragId) return;
+  const l=DB.leads.find(x=>x.id===dragId);
+  if(l&&l.stage!==stage){
+    const old=l.stage; l.stage=stage; l.lastContact=nowStr();
+    addAct(`تم نقل ${l.name}: ${old} ← ${stage}`,'#A78BFA');
+    save(); renderPipeline();
+  }
+  dragId=null;
+}
+
+// ──────────── PROJECTS ────────────
+const projEmoji = ['🏗️','🏢','🌊','🏘️','🌿','🏙️'];
+function renderProjects(){
+  document.getElementById('projects-grid').innerHTML = DB.projects.map((p,i)=>`
+    <div class="card" style="cursor:pointer;transition:.2s" onmouseenter="this.style.borderColor='var(--gold)'" onmouseleave="this.style.borderColor='var(--border)'">
+      <div style="font-size:36px;text-align:center;padding:10px 0">${projEmoji[i%projEmoji.length]}</div>
+      <div style="text-align:center;margin-bottom:12px">
+        <div style="font-size:15px;font-weight:900">${p.name}</div>
+        <div style="font-size:12px;color:var(--text3)">${p.developer}</div>
+      </div>
+      <div class="divider"></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;margin-bottom:12px">
+        <div><div style="color:var(--text3)">الموقع</div><div style="font-weight:700">📍 ${p.location}</div></div>
+        <div><div style="color:var(--text3)">التسليم</div><div style="font-weight:700">📅 ${fmtDate(p.delivery)}</div></div>
+        <div><div style="color:var(--text3)">السعر من</div><div style="color:var(--gold);font-weight:800">${fmtShort(p.priceFrom)}</div></div>
+        <div><div style="color:var(--text3)">العمولة</div><div style="color:var(--emerald);font-weight:800">${p.comm}%</div></div>
+        <div><div style="color:var(--text3)">المقدم</div><div style="font-weight:700">${p.down}%</div></div>
+        <div><div style="color:var(--text3)">التقسيط</div><div style="font-weight:700">${p.years} سنة</div></div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);border-top:1px solid var(--border);padding-top:10px">${p.desc}</div>
+      <div style="margin-top:10px;display:flex;justify-content:space-between;align-items:center">
+        <span class="badge ${p.status==='نشط'?'bg-emerald':p.status==='قادم'?'bg-amber':'bg-muted'}">${p.status}</span>
+        <span style="font-size:11px;color:var(--text3)">${DB.units.filter(u=>u.project===p.name).length} وحدة</span>
+      </div>
+    </div>
+  `).join('') || '<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🏗️</div><div class="empty-text">لا توجد مشاريع</div></div>';
+}
+
+// ──────────── UNITS ────────────
+const unitEmoji={شقة:'🏠',دوبلكس:'🏠',بنتهاوس:'🌆',فيلا:'🏡','تاون هاوس':'🏘️',مكتب:'🏢'};
+const unitBg={متاح:'rgba(45,212,160,.08)',محجوز:'rgba(245,158,43,.08)',مباع:'rgba(244,80,106,.08)'};
+const unitBorder={متاح:'rgba(45,212,160,.25)',محجوز:'rgba(245,158,43,.25)',مباع:'rgba(244,80,106,.25)'};
+
+function renderUnits(){
+  // populate project filter
+  const sel=document.getElementById('units-f-project');
+  if(sel.options.length<=1){
+    DB.projects.forEach(p=>{const o=document.createElement('option');o.textContent=p.name;sel.appendChild(o);});
+  }
+  // populate unit project selector
+  const usel=document.getElementById('u-project-sel');
+  if(usel&&usel.options.length===0){
+    DB.projects.forEach(p=>{const o=document.createElement('option');o.textContent=p.name;usel.appendChild(o);});
+  }
+  const fp=sel.value||''; const ft=document.getElementById('units-f-type')?.value||'';
+  const fs=document.getElementById('units-f-status')?.value||'';
+  const units=DB.units.filter(u=>(!fp||u.project===fp)&&(!ft||u.type===ft)&&(!fs||u.status===fs));
+  document.getElementById('units-grid').innerHTML = units.map(u=>`
+    <div class="prop-card" style="background:${unitBg[u.status]};border-color:${unitBorder[u.status]}">
+      <div class="prop-thumb" style="background:${unitBg[u.status]}">${unitEmoji[u.type]||'🏗️'}
+        <span class="prop-status-tag badge ${u.status==='متاح'?'bg-emerald':u.status==='محجوز'?'bg-amber':'bg-rose'}">${u.status}</span>
+      </div>
+      <div class="prop-body">
+        <div class="prop-name">كود: ${u.code}</div>
+        <div class="prop-loc">🏗️ ${u.project}</div>
+        <div class="prop-price">${fmt(u.price)} ج.م</div>
+        <div class="prop-specs">
+          <span class="badge bg-muted prop-spec">${u.type}</span>
+          <span class="badge bg-sky prop-spec">${u.area} م²</span>
+          <span class="badge bg-violet prop-spec">${u.rooms} غرف</span>
+        </div>
+        ${u.desc?`<div style="font-size:11px;color:var(--text3);margin-top:8px">${u.desc}</div>`:''}
+      </div>
+    </div>
+  `).join('') || '<div class="empty" style="grid-column:1/-1"><div class="empty-icon">🏠</div><div class="empty-text">لا توجد وحدات</div></div>';
+}
+
+// ──────────── DEALS ────────────
+function renderDeals(){
+  const fs=document.getElementById('deals-f-status')?.value||'';
+  const deals=DB.deals.filter(d=>!fs||d.status===fs);
+  const comp=DB.deals.filter(d=>d.status==='مكتملة');
+  const total=comp.reduce((s,d)=>s+d.myComm,0);
+  const maxDeal=comp.reduce((mx,d)=>d.myComm>mx.myComm?d:mx,{myComm:0,client:'—'});
+  const avg=comp.length?Math.round(total/comp.length):0;
+  document.getElementById('deals-total-comm').textContent=fmt(total)+' ج.م';
+  document.getElementById('deals-max').textContent=fmt(maxDeal.myComm)+' ج.م';
+  document.getElementById('deals-max-name').textContent=maxDeal.client;
+  document.getElementById('deals-avg').textContent=fmt(avg)+' ج.م';
+
+  document.getElementById('deals-tbody').innerHTML=deals.map(d=>`
+    <tr>
+      <td style="font-weight:700">${d.client}</td>
+      <td><div>${d.project}</div><div style="font-size:11px;color:var(--text3)">${d.unit||''}</div></td>
+      <td><span class="badge bg-sky">${d.type}</span></td>
+      <td>${fmt(d.value)} ج.م</td>
+      <td style="color:var(--text3)">${d.commPct}% (حصتي ${d.myPct}%)</td>
+      <td>
+        <div style="color:var(--gold);font-weight:900">${fmt(d.commTotal)} ج.م</div>
+        <div style="color:var(--emerald);font-size:12px;font-weight:800">صافي: ${fmt(d.myComm)} ج.م</div>
+      </td>
+      <td style="color:var(--text3);font-size:12px">${fmtDate(d.date)}</td>
+      <td style="color:var(--text3);font-size:12px">${fmtDate(d.collectDate)||'—'}</td>
+      <td><span class="badge ${d.status==='مكتملة'?'bg-emerald':d.status==='ملغاة'?'bg-rose':'bg-amber'}">${d.status}</span></td>
+    </tr>
+  `).join('') || '<tr><td colspan="9"><div class="empty"><div class="empty-icon">💰</div><div class="empty-text">لا توجد صفقات</div></div></td></tr>';
+}
+
+// ──────────── GOALS ────────────
+function renderGoals(){
+  const now=new Date(); const m=now.getMonth(); const y=now.getFullYear();
+  const g=DB.goals;
+  const mDeals=DB.deals.filter(d=>{const dd=new Date(d.date);return dd.getMonth()===m&&dd.getFullYear()===y&&d.status==='مكتملة';});
+  const mComm=mDeals.reduce((s,d)=>s+d.myComm,0);
+  const yDeals=DB.deals.filter(d=>new Date(d.date).getFullYear()===y&&d.status==='مكتملة');
+  const yComm=yDeals.reduce((s,d)=>s+d.myComm,0);
+  const visits=DB.tasks.filter(t=>t.type==='معاينة').length;
+  const followups=DB.followups.length;
+
+  document.getElementById('goals-month-lbl').textContent = now.toLocaleDateString('ar-EG',{month:'long',year:'numeric'});
+  document.getElementById('goals-monthly').innerHTML = [
+    {label:'الصفقات',cur:mDeals.length,target:g.dealsM,unit:'صفقة',cls:'pf-gold',icon:'🤝'},
+    {label:'العمولات',cur:mComm,target:g.commM,unit:'ج.م',cls:'pf-emerald',icon:'💰'},
+    {label:'الليدز',cur:DB.leads.length,target:g.leadsM,unit:'ليد',cls:'pf-sky',icon:'👥'},
+    {label:'المعاينات',cur:visits,target:g.visitsM,unit:'معاينة',cls:'pf-violet',icon:'🏠'},
+    {label:'المتابعات',cur:followups,target:g.followupsM,unit:'متابعة',cls:'pf-amber',icon:'📞'},
+  ].map(x=>goalCard(x.label,x.cur,x.target,x.unit,x.cls,x.icon)).join('');
+
+  document.getElementById('goals-yearly').innerHTML = [
+    {label:'الصفقات السنوية',cur:yDeals.length,target:g.dealsY,unit:'صفقة',cls:'pf-gold',icon:'🏆'},
+    {label:'العمولات السنوية',cur:yComm,target:g.commY,unit:'ج.م',cls:'pf-emerald',icon:'💰'},
+  ].map(x=>goalCard(x.label,x.cur,x.target,x.unit,x.cls,x.icon)).join('');
+
+  // Performance table
+  const months=['يناير','فبراير','مارس','أبريل'];
+  const mockDeals=[2,3,1,mDeals.length]; const mockComm=[68000,117000,45000,mComm];
+  const mockLeads=[8,11,7,DB.leads.length];
+  document.getElementById('perf-tbody').innerHTML=months.map((mo,i)=>{
+    const pct=Math.min(100,Math.round(mockComm[i]/(g.commM||1)*100));
+    const col=pct>=100?'var(--emerald)':pct>=60?'var(--gold)':'var(--rose)';
+    return `<tr>
+      <td style="font-weight:800">${mo}</td>
+      <td>${mockLeads[i]}</td>
+      <td>${mockDeals[i]}</td>
+      <td style="color:var(--gold);font-weight:800">${fmt(mockComm[i])} ج.م</td>
+      <td><div style="display:flex;align-items:center;gap:8px">
+        <div style="width:100px">${progBar(pct,'pf-gold')}</div>
+        <span style="font-size:12px;font-weight:800;color:${col}">${pct}%</span>
+      </div></td>
+    </tr>`;
+  }).join('');
+
+  // Sources
+  const srcCounts={};DB.leads.forEach(l=>{srcCounts[l.source]=(srcCounts[l.source]||0)+1;});
+  const srcSorted=Object.entries(srcCounts).sort((a,b)=>b[1]-a[1]);
+  const maxSrc=srcSorted[0]?.[1]||1;
+  document.getElementById('goals-sources').innerHTML=srcSorted.map(([src,cnt])=>`
+    <div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+        <span>${src}</span><span style="font-weight:800">${cnt}</span>
+      </div>
+      ${progBar(Math.round(cnt/maxSrc*100),'pf-sky')}
+    </div>
+  `).join('');
+
+  // Top projects
+  const projCounts={};DB.leads.forEach(l=>{if(l.project)projCounts[l.project]=(projCounts[l.project]||0)+1;});
+  const projSorted=Object.entries(projCounts).sort((a,b)=>b[1]-a[1]).slice(0,5);
+  const maxP=projSorted[0]?.[1]||1;
+  document.getElementById('goals-top-projects').innerHTML=projSorted.map(([p,cnt])=>`
+    <div style="margin-bottom:10px">
+      <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+        <span>🏗️ ${p}</span><span style="font-weight:800">${cnt} ليد</span>
+      </div>
+      ${progBar(Math.round(cnt/maxP*100),'pf-gold')}
+    </div>
+  `).join('') || '<div class="empty"><div class="empty-text">لا بيانات</div></div>';
+}
+
+// ──────────── TASKS ────────────
+let taskTab='pending';
+function switchTaskTab(t){
+  taskTab=t;
+  document.getElementById('tab-pending').classList.toggle('active',t==='pending');
+  document.getElementById('tab-done').classList.toggle('active',t==='done');
+  renderTasks();
+}
+function renderTasks(){
+  const pending=DB.tasks.filter(t=>!t.done).sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const done=DB.tasks.filter(t=>t.done);
+  const now=new Date();
+
+  const tCard=(t,isDone)=>{
+    const late=!isDone&&t.date&&new Date(t.date)<now;
+    return `<div class="task-card ${isDone?'task-done':''}">
+      <div class="task-hd">
+        <div class="task-title">${taskIcon(t.type)} ${t.title}</div>
+        <span class="badge ${prioColor(t.priority)}">${t.priority}</span>
+      </div>
+      <div class="task-meta">
+        ${t.date?`<span ${late?'style="color:var(--rose)"':''}>📅 ${fmtDT(t.date)}${late?' ⚠️ متأخرة':''}</span>`:''}
+        ${t.client?`<span>👤 ${t.client}</span>`:''}
+        ${t.project?`<span>🏗️ ${t.project}</span>`:''}
+      </div>
+      ${t.notes?`<div style="font-size:11px;color:var(--text3);margin-top:5px">${t.notes}</div>`:''}
+      ${!isDone?`<button class="btn btn-emerald btn-sm" style="margin-top:8px" onclick="completeTask(${t.id})">✓ تم الإنجاز</button>`:''}
+    </div>`;
+  };
+
+  if(taskTab==='pending'){
+    document.getElementById('tasks-pending-list').innerHTML = pending.length ? pending.map(t=>tCard(t,false)).join('') : '<div class="empty"><div class="empty-icon">✅</div><div class="empty-text">ما شاء الله! لا مهام معلقة</div></div>';
+    document.getElementById('tasks-done-list').innerHTML='';
+  } else {
+    document.getElementById('tasks-pending-list').innerHTML='';
+    document.getElementById('tasks-done-list').innerHTML = done.length ? done.map(t=>tCard(t,true)).join('') : '<div class="empty"><div class="empty-icon">📋</div><div class="empty-text">لا مهام مكتملة</div></div>';
+  }
+  document.getElementById('chip-tasks').textContent=pending.filter(t=>new Date(t.date)<now).length||pending.length;
+}
+
+// ──────────── FOLLOW-UPS ────────────
+function renderFollowups(){
+  const fu=DB.followups;
+  document.getElementById('followups-tbody').innerHTML=fu.map(f=>`
+    <tr>
+      <td style="font-weight:700">${f.client}</td>
+      <td><span class="badge bg-sky">${f.type}</span></td>
+      <td style="color:var(--text3);font-size:12px">${fmtDate(f.date)}</td>
+      <td style="font-size:12px;max-width:220px;color:var(--text2)">${f.notes||'—'}</td>
+      <td><span class="badge ${f.status==='done'?'bg-emerald':'bg-amber'}">${f.status==='done'?'مكتملة':'معلقة'}</span></td>
+      <td>
+        ${f.status!=='done'?`<button class="btn btn-emerald btn-sm" onclick="completeFollowup(${f.id})">✓ تم</button>`:''}
+        <span style="font-size:11px;color:var(--text3);margin-right:6px">${f.nextDate?'التالي: '+fmtDate(f.nextDate):''}</span>
+      </td>
+    </tr>
+  `).join('') || '<tr><td colspan="6"><div class="empty"><div class="empty-icon">📞</div><div class="empty-text">لا توجد متابعات</div></div></td></tr>';
+}
+
+// ──────────── SAVE ACTIONS ────────────
+function saveLead(){
+  const name=document.getElementById('l-name').value.trim();
+  const phone=document.getElementById('l-phone').value.trim();
+  if(!name||!phone){alert('الاسم والهاتف مطلوبان');return;}
+  DB.leads.push({
+    id:++DB.nid, name, phone,
+    type:document.getElementById('l-type').value,
+    heat:document.getElementById('l-heat').value,
+    stage:document.getElementById('l-stage').value,
+    budget:+document.getElementById('l-budget').value||0,
+    project:document.getElementById('l-project').value,
+    unitType:document.getElementById('l-unit-type').value,
+    source:document.getElementById('l-source').value,
+    nationality:document.getElementById('l-nationality').value||'مصري',
+    lastContact:document.getElementById('l-last-contact').value||nowStr(),
+    notes:document.getElementById('l-notes').value,
+    date:nowStr()
+  });
+  addAct(`عميل جديد: ${name} من ${document.getElementById('l-source').value}`,'#38C4F8');
+  save(); closeModal('m-lead');
+  document.querySelectorAll('#m-lead input,#m-lead textarea').forEach(i=>i.value='');
+  renderLeads(); renderPipeline(); renderDashboard();
+}
+
+function saveDeal(){
+  const client=document.getElementById('d-client').value.trim();
+  const project=document.getElementById('d-project').value.trim();
+  const val=+document.getElementById('d-value').value;
+  if(!client||!project||!val){alert('يرجى ملء الحقول المطلوبة');return;}
+  const pct=+document.getElementById('d-comm-pct').value||3;
+  const myPct=+document.getElementById('d-my-pct').value||100;
+  const commTotal=Math.round(val*pct/100);
+  const myComm=Math.round(commTotal*myPct/100);
+  DB.deals.push({
+    id:++DB.nid, client, project,
+    unit:document.getElementById('d-unit').value,
+    type:document.getElementById('d-type').value,
+    value:val, commPct:pct, commTotal, myPct, myComm,
+    date:document.getElementById('d-date').value||nowStr(),
+    collectDate:document.getElementById('d-collect-date').value,
+    status:document.getElementById('d-status').value,
+    contractStage:document.getElementById('d-contract-stage').value,
+    notes:document.getElementById('d-notes').value,
+  });
+  addAct(`صفقة جديدة: ${client} — ${project} 💰`,'#E2B96A');
+  save(); closeModal('m-deal');
+  document.querySelectorAll('#m-deal input,#m-deal textarea').forEach(i=>i.value='');
+  document.getElementById('d-comm-pct').value='3';
+  document.getElementById('d-my-pct').value='100';
+  renderDeals(); renderDashboard();
+}
+
+function saveTask(){
+  const title=document.getElementById('t-title').value.trim();
+  if(!title){alert('عنوان المهمة مطلوب');return;}
+  DB.tasks.push({
+    id:++DB.nid, title,
+    type:document.getElementById('t-type').value,
+    priority:document.getElementById('t-priority').value,
+    date:document.getElementById('t-date').value,
+    client:document.getElementById('t-client').value,
+    project:document.getElementById('t-project').value,
+    notes:document.getElementById('t-notes').value,
+    done:false
+  });
+  addAct(`مهمة جديدة: ${title}`,'#F59E2B');
+  save(); closeModal('m-task');
+  document.querySelectorAll('#m-task input,#m-task textarea').forEach(i=>i.value='');
+  renderTasks(); renderDashboard();
+}
+
+function saveProject(){
+  const name=document.getElementById('p-name').value.trim();
+  if(!name){alert('اسم المشروع مطلوب');return;}
+  DB.projects.push({
+    id:++DB.nid, name,
+    developer:document.getElementById('p-developer').value,
+    location:document.getElementById('p-location').value,
+    delivery:document.getElementById('p-delivery').value,
+    priceFrom:+document.getElementById('p-price-from').value||0,
+    priceTo:+document.getElementById('p-price-to').value||0,
+    down:+document.getElementById('p-down').value||10,
+    years:+document.getElementById('p-years').value||8,
+    comm:+document.getElementById('p-comm').value||3,
+    status:document.getElementById('p-status').value,
+    desc:document.getElementById('p-desc').value,
+  });
+  addAct(`مشروع جديد: ${name}`,'#2DD4A0');
+  save(); closeModal('m-project');
+  document.querySelectorAll('#m-project input,#m-project textarea').forEach(i=>i.value='');
+  renderProjects();
+}
+
+function saveUnit(){
+  const code=document.getElementById('u-code').value.trim();
+  if(!code){alert('كود الوحدة مطلوب');return;}
+  DB.units.push({
+    id:++DB.nid, code,
+    project:document.getElementById('u-project-sel').value,
+    type:document.getElementById('u-type').value,
+    area:+document.getElementById('u-area').value||0,
+    rooms:+document.getElementById('u-rooms').value||0,
+    price:+document.getElementById('u-price').value||0,
+    status:document.getElementById('u-status').value,
+    desc:document.getElementById('u-desc').value,
+  });
+  save(); closeModal('m-unit');
+  document.querySelectorAll('#m-unit input').forEach(i=>i.value='');
+  renderUnits();
+}
+
+function saveFollowup(){
+  const client=document.getElementById('fu-client').value.trim();
+  if(!client){alert('اسم العميل مطلوب');return;}
+  DB.followups.push({
+    id:++DB.nid, client,
+    type:document.getElementById('fu-type').value,
+    date:document.getElementById('fu-date').value||nowStr(),
+    nextDate:document.getElementById('fu-next').value,
+    notes:document.getElementById('fu-notes').value,
+    status:'pending'
+  });
+  addAct(`متابعة مع ${client}`,'#38C4F8');
+  save(); closeModal('m-followup');
+  document.querySelectorAll('#m-followup input,#m-followup textarea').forEach(i=>i.value='');
+  renderFollowups();
+}
+
+function saveGoals(){
+  DB.goals = {
+    dealsM: +document.getElementById('g-deals-m').value||DB.goals.dealsM,
+    commM: +document.getElementById('g-comm-m').value||DB.goals.commM,
+    leadsM: +document.getElementById('g-leads-m').value||DB.goals.leadsM,
+    visitsM: +document.getElementById('g-visits-m').value||DB.goals.visitsM,
+    followupsM: +document.getElementById('g-followups-m').value||DB.goals.followupsM,
+    dealsY: +document.getElementById('g-deals-y').value||DB.goals.dealsY,
+    commY: +document.getElementById('g-comm-y').value||DB.goals.commY,
+    brokerName: document.getElementById('g-broker-name').value||DB.goals.brokerName,
+  };
+  if(DB.goals.brokerName){
+    document.getElementById('sb-broker-name').textContent=DB.goals.brokerName;
+    document.getElementById('sb-avatar-txt').textContent=DB.goals.brokerName[0];
+  }
+  save(); closeModal('m-goals'); renderGoals(); renderDashboard();
+}
+
+// ──────────── OTHER ACTIONS ────────────
+function advanceLead(id){
+  const l=DB.leads.find(x=>x.id===id);
+  if(!l) return;
+  const idx=STAGES.indexOf(l.stage);
+  if(idx<STAGES.length-1){l.stage=STAGES[idx+1];l.lastContact=nowStr();}
+  addAct(`${l.name} انتقل إلى: ${l.stage}`,'#A78BFA');
+  save(); renderLeads(); renderPipeline();
+}
+function deleteLead(id){
+  if(!confirm('حذف هذا العميل؟')) return;
+  DB.leads=DB.leads.filter(l=>l.id!==id);
+  save(); renderLeads(); renderPipeline();
+}
+function completeTask(id){
+  const t=DB.tasks.find(x=>x.id===id);
+  if(t){t.done=true;addAct(`تم إتمام: ${t.title}`,'#2DD4A0');save();renderTasks();}
+}
+function completeFollowup(id){
+  const f=DB.followups.find(x=>x.id===id);
+  if(f){f.status='done';save();renderFollowups();}
+}
+function openFollowupForLead(id){
+  const l=DB.leads.find(x=>x.id===id);
+  if(l){document.getElementById('fu-client').value=l.name;}
+  openModal('m-followup');
+}
+
+// ──────────── DEAL CALC ────────────
+function calcDealComm(){
+  const v=+document.getElementById('d-value').value||0;
+  const p=+document.getElementById('d-comm-pct').value||0;
+  const mp=+document.getElementById('d-my-pct').value||100;
+  const total=Math.round(v*p/100);
+  const mine=Math.round(total*mp/100);
+  document.getElementById('d-comm-total').value=fmt(total)+' ج.م';
+  document.getElementById('d-my-comm').value=fmt(mine)+' ج.م';
+}
+
+// ──────────── GOALS MODAL OPEN ────────────
+function openGoalsModal(){
+  const g=DB.goals;
+  document.getElementById('g-deals-m').value=g.dealsM;
+  document.getElementById('g-comm-m').value=g.commM;
+  document.getElementById('g-leads-m').value=g.leadsM;
+  document.getElementById('g-visits-m').value=g.visitsM;
+  document.getElementById('g-followups-m').value=g.followupsM;
+  document.getElementById('g-deals-y').value=g.dealsY;
+  document.getElementById('g-comm-y').value=g.commY;
+  document.getElementById('g-broker-name').value=g.brokerName||'';
+  openModal('m-goals');
+}
+
+// ──────────── MODAL HELPERS ────────────
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-bg').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
+
+// ──────────── INIT ────────────
+renderDashboard();
+renderUnits(); // pre-populate project select
+</script>
+</body>
+</html>
