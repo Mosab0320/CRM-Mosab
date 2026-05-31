@@ -42,7 +42,7 @@ class UnitsFragment : Fragment() {
     }
 
     private fun setupSpinners() {
-        val types = listOf("كل الأنواع", "شقة", "دوبلكس", "بنتهاوس", "فيلا", "تاون هاوس", "مكتب")
+        val types = listOf("كل الأنواع", "Apartment", "Duplex", "Penthouse", "Villa", "تاون هاوس", "مكتب")
         val statuses = listOf("كل الحالات", "متاح", "محجوز", "مباع")
 
         lifecycleScope.launch(Dispatchers.IO) {

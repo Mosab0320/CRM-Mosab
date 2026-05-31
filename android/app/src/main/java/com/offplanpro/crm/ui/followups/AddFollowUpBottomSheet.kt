@@ -44,7 +44,7 @@ class AddFollowUpBottomSheet : BottomSheetDialogFragment() {
         val btnSave = view.findViewById<Button>(R.id.btn_save)
         val btnCancel = view.findViewById<Button>(R.id.btn_cancel)
 
-        val types = arrayOf("مكالمة هاتفية", "واتساب", "زيارة", "بريد إلكتروني", "اجتماع")
+        val types = arrayOf("مكالمة هاتفية", "WhatsApp", "زيارة", "Email", "Meeting")
         spType?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
             .also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
         etDate?.setText(LocalDate.now().toString())

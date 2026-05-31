@@ -6,7 +6,7 @@
     android:orientation="horizontal"
     android:gravity="center_vertical"
     android:padding="8dp"
-    android:layoutDirection="rtl">
+    android:layoutDirection="ltr">
 
     <View
         android:id="@+id/v_dot"

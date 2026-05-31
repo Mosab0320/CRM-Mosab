@@ -47,8 +47,8 @@ class AddTaskBottomSheet : BottomSheetDialogFragment() {
         val btnSave = view.findViewById<Button>(R.id.btn_save)
         val btnCancel = view.findViewById<Button>(R.id.btn_cancel)
 
-        val types = arrayOf("مكالمة", "معاينة", "اجتماع", "متابعة", "أوراق وعقود", "تسجيل")
-        val priorities = arrayOf("عادية", "مهمة", "عاجلة")
+        val types = arrayOf("Call", "Viewing", "Meeting", "Follow-up", "Contracts", "تسجيل")
+        val priorities = arrayOf("Normal", "Important", "Urgent")
         spType?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
             .also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
         spPriority?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, priorities)
@@ -61,7 +61,7 @@ class AddTaskBottomSheet : BottomSheetDialogFragment() {
         if (taskId != null && taskId > 0L) {
             view.findViewById<TextView>(R.id.tv_sheet_title)?.text = "تعديل مهمة"
             lifecycleScope.launch(Dispatchers.IO) {
-                val task = db.taskDao().getPendingTasks().value?.find { it.id == taskId }
+                val task = db.taskDao().getAllTasksList().find { it.id == taskId }
                 task?.let {
                     editTask = it
                     requireActivity().runOnUiThread {
@@ -86,8 +86,8 @@ class AddTaskBottomSheet : BottomSheetDialogFragment() {
             val task = CrmTask(
                 id = editTask?.id ?: 0,
                 title = title,
-                type = spType?.selectedItem?.toString() ?: "مكالمة",
-                priority = spPriority?.selectedItem?.toString() ?: "عادية",
+                type = spType?.selectedItem?.toString() ?: "Call",
+                priority = spPriority?.selectedItem?.toString() ?: "Normal",
                 date = etDate?.text?.toString() ?: LocalDateTime.now().format(formatter),
                 client = etClient?.text?.toString()?.trim() ?: "",
                 project = etProject?.text?.toString()?.trim() ?: "",

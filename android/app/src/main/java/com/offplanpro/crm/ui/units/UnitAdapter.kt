@@ -46,9 +46,9 @@ class UnitAdapter : ListAdapter<CrmUnit, UnitAdapter.VH>(DIFF) {
 
     private fun formatPrice(p: Double): String {
         return when {
-            p >= 1_000_000 -> "${String.format("%.1f", p / 1_000_000)}م ج.م"
-            p >= 1_000 -> "${(p / 1_000).toInt()}ك ج.م"
-            else -> "${p.toInt()} ج.م"
+            p >= 1_000_000 -> "${String.format("%.1f", p / 1_000_000)}م EGP"
+            p >= 1_000 -> "${(p / 1_000).toInt()}ك EGP"
+            else -> "${p.toInt()} EGP"
         }
     }
 }

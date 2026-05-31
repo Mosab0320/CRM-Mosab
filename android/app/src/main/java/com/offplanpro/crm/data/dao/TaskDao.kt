@@ -9,6 +9,9 @@ interface TaskDao {
     @Query("SELECT * FROM tasks ORDER BY date ASC, id DESC")
     fun getAllTasks(): LiveData<List<CrmTask>>
 
+    @Query("SELECT * FROM tasks ORDER BY date ASC, id DESC")
+    suspend fun getAllTasksList(): List<CrmTask>
+
     @Query("SELECT * FROM tasks WHERE done = 0 ORDER BY date ASC")
     fun getPendingTasks(): LiveData<List<CrmTask>>
 

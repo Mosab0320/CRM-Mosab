@@ -37,17 +37,17 @@ class DealAdapter : ListAdapter<Deal, DealAdapter.VH>(DIFF) {
         val statusBadge = v.findViewById<TextView>(R.id.tv_status_badge)
         statusBadge?.text = deal.status
         when (deal.status) {
-            "مكتملة" -> { statusBadge?.setTextColor(Color.parseColor("#2DD4A0")); statusBadge?.setBackgroundColor(Color.parseColor("#202DD4A0")) }
-            "جارية" -> { statusBadge?.setTextColor(Color.parseColor("#F59E2B")); statusBadge?.setBackgroundColor(Color.parseColor("#20F59E2B")) }
-            "ملغاة" -> { statusBadge?.setTextColor(Color.parseColor("#F4506A")); statusBadge?.setBackgroundColor(Color.parseColor("#20F4506A")) }
+            "Completed" -> { statusBadge?.setTextColor(Color.parseColor("#2DD4A0")); statusBadge?.setBackgroundColor(Color.parseColor("#202DD4A0")) }
+            "Ongoing" -> { statusBadge?.setTextColor(Color.parseColor("#F59E2B")); statusBadge?.setBackgroundColor(Color.parseColor("#20F59E2B")) }
+            "Cancelled" -> { statusBadge?.setTextColor(Color.parseColor("#F4506A")); statusBadge?.setBackgroundColor(Color.parseColor("#20F4506A")) }
         }
     }
 
     private fun formatPrice(p: Double): String {
         return when {
-            p >= 1_000_000 -> "${String.format("%.1f", p / 1_000_000)}م ج.م"
-            p >= 1_000 -> "${(p / 1_000).toInt()}ك ج.م"
-            else -> "${p.toInt()} ج.م"
+            p >= 1_000_000 -> "${String.format("%.1f", p / 1_000_000)}م EGP"
+            p >= 1_000 -> "${(p / 1_000).toInt()}ك EGP"
+            else -> "${p.toInt()} EGP"
         }
     }
 }

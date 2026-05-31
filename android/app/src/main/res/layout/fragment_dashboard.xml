@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:layoutDirection="rtl">
+    android:layoutDirection="ltr">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,14 +22,14 @@
                 android:id="@+id/tv_greeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="لوحة التحكم"
+                android:text="Dashboard"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="مرحباً — إليك ملخص أداءك اليوم"
+                android:text="Welcome — Here is your performance summary"
                 android:textSize="12sp"
                 android:textColor="@color/text_tertiary"
                 android:layout_marginTop="2dp"/>
@@ -54,11 +54,11 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="16dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="عمولة الشهر" android:textSize="11sp" android:textColor="@color/text_tertiary"
-                        android:textAllCaps="true" android:letterSpacing="0.05" android:layout_marginBottom="8dp"/>
+                        android:text="Monthly Commission" android:textSize="11sp" android:textColor="@color/text_tertiary"
+                        android:layout_marginBottom="8dp"/>
                     <TextView android:id="@+id/tv_commission"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="0 ج.م" android:textSize="22sp" android:textStyle="bold"
+                        android:text="0 EGP" android:textSize="20sp" android:textStyle="bold"
                         android:textColor="@color/gold"/>
                     <TextView android:id="@+id/tv_comm_growth"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -78,15 +78,15 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="16dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="صفقات الشهر" android:textSize="11sp" android:textColor="@color/text_tertiary"
-                        android:textAllCaps="true" android:letterSpacing="0.05" android:layout_marginBottom="8dp"/>
+                        android:text="Monthly Deals" android:textSize="11sp" android:textColor="@color/text_tertiary"
+                        android:layout_marginBottom="8dp"/>
                     <TextView android:id="@+id/tv_deals"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="0" android:textSize="22sp" android:textStyle="bold"
                         android:textColor="@color/emerald"/>
                     <TextView android:id="@+id/tv_deals_goal"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="الهدف: —" android:textSize="11sp" android:textColor="@color/text_tertiary"
+                        android:text="Target: —" android:textSize="11sp" android:textColor="@color/text_tertiary"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -102,15 +102,15 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="16dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="الليدز النشطة" android:textSize="11sp" android:textColor="@color/text_tertiary"
-                        android:textAllCaps="true" android:letterSpacing="0.05" android:layout_marginBottom="8dp"/>
+                        android:text="Active Leads" android:textSize="11sp" android:textColor="@color/text_tertiary"
+                        android:layout_marginBottom="8dp"/>
                     <TextView android:id="@+id/tv_leads"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="0" android:textSize="22sp" android:textStyle="bold"
                         android:textColor="@color/sky"/>
                     <TextView android:id="@+id/tv_new_leads"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="جديد اليوم: 0" android:textSize="11sp" android:textColor="@color/text_tertiary"
+                        android:text="New today: 0" android:textSize="11sp" android:textColor="@color/text_tertiary"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -126,21 +126,21 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="16dp">
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="مهام متأخرة" android:textSize="11sp" android:textColor="@color/text_tertiary"
-                        android:textAllCaps="true" android:letterSpacing="0.05" android:layout_marginBottom="8dp"/>
+                        android:text="Overdue Tasks" android:textSize="11sp" android:textColor="@color/text_tertiary"
+                        android:layout_marginBottom="8dp"/>
                     <TextView android:id="@+id/tv_overdue"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="0" android:textSize="22sp" android:textStyle="bold"
                         android:textColor="@color/rose"/>
                     <TextView android:id="@+id/tv_pending"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="معلقة: 0" android:textSize="11sp" android:textColor="@color/text_tertiary"
+                        android:text="Pending: 0" android:textSize="11sp" android:textColor="@color/text_tertiary"
                         android:layout_marginTop="4dp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </GridLayout>
 
-        <!-- Goals Mini -->
+        <!-- Mini Goals -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -151,56 +151,54 @@
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical" android:padding="16dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="🎯 أهداف الشهر" android:textSize="15sp" android:textStyle="bold"
-                    android:textColor="@color/text_primary" android:layout_marginBottom="12dp"/>
-                <!-- Deals goal -->
+                    android:text="📊 Monthly Goals"
+                    android:textSize="15sp" android:textStyle="bold" android:textColor="@color/text_primary"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Goal Deals -->
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="4dp">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:text="الصفقات"
-                        android:textSize="12sp" android:textColor="@color/text_secondary"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                        android:text="🤝 Deals" android:textSize="12sp" android:textColor="@color/text_secondary"/>
                     <TextView android:id="@+id/tv_goal_deals_pct"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="0%" android:textSize="13sp" android:textStyle="bold"
-                        android:textColor="@color/emerald"/>
+                        android:text="0%" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/rose"/>
                 </LinearLayout>
                 <ProgressBar android:id="@+id/pb_goal_deals"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent" android:layout_height="5dp"
-                    android:max="100" android:progress="0" android:layout_marginBottom="10dp"
-                    android:progressTint="@color/emerald"/>
-                <!-- Comm goal -->
+                    android:layout_width="match_parent" android:layout_height="6dp"
+                    android:progressDrawable="@drawable/progress_gold"
+                    android:max="100" android:progress="0" android:layout_marginBottom="12dp"/>
+
+                <!-- Goal Commission -->
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="4dp">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:text="العمولة"
-                        android:textSize="12sp" android:textColor="@color/text_secondary"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                        android:text="💰 Commission" android:textSize="12sp" android:textColor="@color/text_secondary"/>
                     <TextView android:id="@+id/tv_goal_comm_pct"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="0%" android:textSize="13sp" android:textStyle="bold"
-                        android:textColor="@color/gold"/>
+                        android:text="0%" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/rose"/>
                 </LinearLayout>
                 <ProgressBar android:id="@+id/pb_goal_comm"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent" android:layout_height="5dp"
-                    android:max="100" android:progress="0" android:layout_marginBottom="10dp"
-                    android:progressTint="@color/gold"/>
-                <!-- Leads goal -->
+                    android:layout_width="match_parent" android:layout_height="6dp"
+                    android:progressDrawable="@drawable/progress_emerald"
+                    android:max="100" android:progress="0" android:layout_marginBottom="12dp"/>
+
+                <!-- Goal Leads -->
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="4dp">
-                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:text="الليدز"
-                        android:textSize="12sp" android:textColor="@color/text_secondary"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
+                        android:text="👥 Leads" android:textSize="12sp" android:textColor="@color/text_secondary"/>
                     <TextView android:id="@+id/tv_goal_leads_pct"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="0%" android:textSize="13sp" android:textStyle="bold"
-                        android:textColor="@color/sky"/>
+                        android:text="0%" android:textSize="12sp" android:textStyle="bold" android:textColor="@color/rose"/>
                 </LinearLayout>
                 <ProgressBar android:id="@+id/pb_goal_leads"
                     style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="match_parent" android:layout_height="5dp"
-                    android:max="100" android:progress="0"
-                    android:progressTint="@color/sky"/>
+                    android:layout_width="match_parent" android:layout_height="6dp"
+                    android:progressDrawable="@drawable/progress_sky"
+                    android:max="100" android:progress="0"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -215,7 +213,7 @@
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical" android:padding="16dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="🔥 الليدز الساخنة"
+                    android:text="🔥 Hot Leads"
                     android:textSize="15sp" android:textStyle="bold" android:textColor="@color/text_primary"
                     android:layout_marginBottom="12dp"/>
                 <androidx.recyclerview.widget.RecyclerView
@@ -226,7 +224,7 @@
                 <TextView android:id="@+id/tv_no_hot_leads"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="لا توجد ليدز ساخنة حالياً"
+                    android:text="No hot leads yet 🔥"
                     android:textColor="@color/text_tertiary"
                     android:textSize="13sp"
                     android:gravity="center"
@@ -246,18 +244,23 @@
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical" android:padding="16dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="📅 المهام القادمة"
+                    android:text="📅 Upcoming Tasks"
                     android:textSize="15sp" android:textStyle="bold" android:textColor="@color/text_primary"
                     android:layout_marginBottom="12dp"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_upcoming_tasks"
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"/>
+                    android:scrollbars="none">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_upcoming_tasks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"/>
+                </HorizontalScrollView>
                 <TextView android:id="@+id/tv_no_tasks"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="لا مهام قادمة 🎉"
+                    android:text="No upcoming tasks 🎉"
                     android:textColor="@color/text_tertiary"
                     android:textSize="13sp"
                     android:gravity="center"
@@ -277,7 +280,7 @@
             <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                 android:orientation="vertical" android:padding="16dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="⚡ آخر النشاطات"
+                    android:text="⚡ Recent Activity"
                     android:textSize="15sp" android:textStyle="bold" android:textColor="@color/text_primary"
                     android:layout_marginBottom="12dp"/>
                 <androidx.recyclerview.widget.RecyclerView

@@ -4,12 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background"
-    android:layoutDirection="rtl">
+    android:layoutDirection="ltr">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="بايبلاين المبيعات"
+        android:text="Sales Pipeline"
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="@color/text_primary"

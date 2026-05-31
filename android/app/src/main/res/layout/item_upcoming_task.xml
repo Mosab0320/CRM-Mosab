@@ -7,7 +7,7 @@
     android:background="@drawable/bg_surface"
     android:padding="12dp"
     android:layout_marginEnd="8dp"
-    android:layoutDirection="rtl">
+    android:layoutDirection="ltr">
 
     <TextView
         android:id="@+id/tv_date"

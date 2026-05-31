@@ -55,16 +55,16 @@ class AddLeadBottomSheet : BottomSheetDialogFragment() {
         val btnSave = view.findViewById<Button>(R.id.btn_save)
         val btnCancel = view.findViewById<Button>(R.id.btn_cancel)
 
-        val types = arrayOf("مشتري", "مستثمر", "بائع")
+        val types = arrayOf("Buyer", "Investor", "Seller")
         val heats = arrayOf("hot", "warm", "cold")
-        val stages = arrayOf("ليد جديد", "تم التواصل", "معاينة", "عرض سعر", "تفاوض", "تم الإغلاق")
+        val stages = arrayOf("New Lead", "Contacted", "Viewing", "Offer", "Negotiation", "Closed")
         spType?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types).also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
         spHeat?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, heats).also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
         spStage?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, stages).also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
 
         val leadId = arguments?.getLong(ARG_LEAD_ID)
         if (leadId != null && leadId > 0L) {
-            tvTitle?.text = "تعديل عميل"
+            tvTitle?.text = "Edit Client"
             lifecycleScope.launch(Dispatchers.IO) {
                 val lead = db.leadDao().getAllLeadsList().find { it.id == leadId }
                 lead?.let {
@@ -90,21 +90,21 @@ class AddLeadBottomSheet : BottomSheetDialogFragment() {
             val name = etName?.text?.toString()?.trim() ?: ""
             val phone = etPhone?.text?.toString()?.trim() ?: ""
             if (name.isEmpty() || phone.isEmpty()) {
-                Toast.makeText(requireContext(), "الاسم والهاتف مطلوبان", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Name and phone are required", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val lead = Lead(
                 id = editLead?.id ?: 0,
                 name = name,
                 phone = phone,
-                type = spType?.selectedItem?.toString() ?: "مشتري",
+                type = spType?.selectedItem?.toString() ?: "Buyer",
                 heat = spHeat?.selectedItem?.toString() ?: "warm",
-                stage = spStage?.selectedItem?.toString() ?: "ليد جديد",
+                stage = spStage?.selectedItem?.toString() ?: "New Lead",
                 budget = etBudget?.text?.toString()?.toDoubleOrNull() ?: 0.0,
                 project = etProject?.text?.toString()?.trim() ?: "",
                 unitType = etUnitType?.text?.toString()?.trim() ?: "",
                 source = etSource?.text?.toString()?.trim() ?: "",
-                nationality = etNationality?.text?.toString()?.trim() ?: "مصري",
+                nationality = etNationality?.text?.toString()?.trim() ?: "",
                 notes = etNotes?.text?.toString()?.trim() ?: "",
                 date = editLead?.date ?: LocalDate.now().toString(),
                 lastContact = LocalDate.now().toString()
@@ -115,9 +115,9 @@ class AddLeadBottomSheet : BottomSheetDialogFragment() {
                 } else {
                     db.leadDao().insert(lead)
                     db.activityDao().insert(ActivityItem(
-                        text = "عميل جديد: $name من ${lead.source}",
+                        text = "New client: $name from ${lead.source}",
                         color = "#38C4F8",
-                        time = "الآن"
+                        time = "Now"
                     ))
                 }
                 requireActivity().runOnUiThread { dismiss() }

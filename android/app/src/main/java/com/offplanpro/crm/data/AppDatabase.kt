@@ -16,9 +16,11 @@ import com.offplanpro.crm.data.entity.*
         CrmTask::class,
         FollowUp::class,
         Goal::class,
-        ActivityItem::class
+        ActivityItem::class,
+        CallLogEntry::class,
+        ClientNote::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -30,6 +32,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun followUpDao(): FollowUpDao
     abstract fun goalDao(): GoalDao
     abstract fun activityDao(): ActivityDao
+    abstract fun callLogDao(): CallLogDao
+    abstract fun clientNoteDao(): ClientNoteDao
 
     companion object {
         @Volatile
@@ -41,7 +45,9 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "offplanpro_db"
-                ).build()
+                )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
             }

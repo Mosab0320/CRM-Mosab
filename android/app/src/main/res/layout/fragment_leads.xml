@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:layoutDirection="rtl">
+    android:layoutDirection="ltr">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +23,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="العملاء والليدز"
+                android:text="Clients"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
@@ -33,7 +33,7 @@
                 android:id="@+id/et_search"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:hint="🔍 ابحث في العملاء…"
+                android:hint="🔍 Search clients..."
                 android:background="@color/surface"
                 android:textColor="@color/text_primary"
                 android:textColorHint="@color/text_tertiary"
@@ -68,7 +68,7 @@
                     android:id="@+id/tv_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="0 عميل"
+                    android:text="0 clients"
                     android:textSize="12sp"
                     android:textColor="@color/text_tertiary"
                     android:layout_marginStart="8dp"/>
@@ -88,7 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="لا توجد عملاء"
+            android:text="No clients found"
             android:textColor="@color/text_tertiary"
             android:textSize="16sp"
             android:gravity="center"
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:contentDescription="إضافة عميل"
+        android:contentDescription="Add Client"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/gold"
         app:tint="@color/background"/>

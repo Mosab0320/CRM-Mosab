@@ -25,7 +25,7 @@ class PipelineFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var db: AppDatabase
 
-    private val stages = listOf("ليد جديد", "تم التواصل", "معاينة", "عرض سعر", "تفاوض", "تم الإغلاق")
+    private val stages = listOf("New Lead", "Contacted", "Viewing", "Offer", "Negotiation", "Closed")
     private val stageColors = listOf("#38C4F8", "#A78BFA", "#F59E2B", "#E2B96A", "#F4506A", "#2DD4A0")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -73,7 +73,7 @@ class PipelineFragment : Fragment() {
 
         if (leads.isEmpty()) {
             val empty = TextView(requireContext()).apply {
-                text = "لا عملاء"
+                text = "No clients"
                 textSize = 12f
                 setTextColor(Color.parseColor("#4A5570"))
                 gravity = android.view.Gravity.CENTER
@@ -109,7 +109,7 @@ class PipelineFragment : Fragment() {
             typeface = android.graphics.Typeface.DEFAULT_BOLD
         }
         val budgetView = TextView(requireContext()).apply {
-            text = "${when { lead.budget >= 1_000_000 -> "${String.format("%.1f", lead.budget / 1_000_000)}م"; lead.budget >= 1_000 -> "${(lead.budget/1000).toInt()}ك"; else -> lead.budget.toInt().toString() }} ج.م"
+            text = "${when { lead.budget >= 1_000_000 -> "${String.format("%.1f", lead.budget / 1_000_000)}M"; lead.budget >= 1_000 -> "${(lead.budget/1000).toInt()}K"; else -> lead.budget.toInt().toString() }} EGP"
             textSize = 12f
             setTextColor(Color.parseColor("#E2B96A"))
         }

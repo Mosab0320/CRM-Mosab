@@ -27,7 +27,7 @@ class LeadsFragment : Fragment() {
     private var allLeads: List<Lead> = emptyList()
     private lateinit var adapter: LeadAdapter
 
-    private val stages = listOf("ليد جديد", "تم التواصل", "معاينة", "عرض سعر", "تفاوض", "تم الإغلاق")
+    private val stages = listOf("New Lead", "Contacted", "Viewing", "Offer", "Negotiation", "Closed")
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentLeadsBinding.inflate(inflater, container, false)
@@ -45,8 +45,8 @@ class LeadsFragment : Fragment() {
     }
 
     private fun setupSpinners() {
-        val stageList = listOf("كل المراحل") + stages
-        val heats = listOf("كل الحرارة", "hot", "warm", "cold")
+        val stageList = listOf("All Stages") + stages
+        val heats = listOf("All Heat", "hot", "warm", "cold")
         binding.spinnerStage.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, stageList)
             .also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
         binding.spinnerHeat.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, heats)
@@ -63,12 +63,12 @@ class LeadsFragment : Fragment() {
         adapter = LeadAdapter(
             onDelete = { lead ->
                 AlertDialog.Builder(requireContext())
-                    .setTitle("حذف عميل")
-                    .setMessage("هل تريد حذف ${lead.name}؟")
-                    .setPositiveButton("نعم") { _, _ ->
+                    .setTitle("Delete Client")
+                    .setMessage("Are you sure you want to delete ${lead.name}?")
+                    .setPositiveButton("Yes") { _, _ ->
                         lifecycleScope.launch(Dispatchers.IO) { db.leadDao().delete(lead) }
                     }
-                    .setNegativeButton("لا", null)
+                    .setNegativeButton("No", null)
                     .show()
             },
             onEdit = { lead ->
@@ -82,9 +82,9 @@ class LeadsFragment : Fragment() {
                         val updated = lead.copy(stage = newStage, lastContact = LocalDate.now().toString())
                         db.leadDao().update(updated)
                         db.activityDao().insert(ActivityItem(
-                            text = "${lead.name} انتقل إلى: $newStage",
+                            text = "${lead.name} moved to: $newStage",
                             color = "#A78BFA",
-                            time = "الآن"
+                            time = "Now"
                         ))
                     }
                 }
@@ -124,12 +124,12 @@ class LeadsFragment : Fragment() {
         val heatFilter = binding.spinnerHeat.selectedItem?.toString() ?: ""
         val filtered = allLeads.filter { lead ->
             val matchQuery = query.isEmpty() || lead.name.lowercase().contains(query) || lead.phone.contains(query)
-            val matchStage = stageFilter == "كل المراحل" || lead.stage == stageFilter
-            val matchHeat = heatFilter == "كل الحرارة" || lead.heat == heatFilter
+            val matchStage = stageFilter == "All Stages" || lead.stage == stageFilter
+            val matchHeat = heatFilter == "All Heat" || lead.heat == heatFilter
             matchQuery && matchStage && matchHeat
         }
         adapter.submitList(filtered)
-        binding.tvCount.text = "${filtered.size} عميل"
+        binding.tvCount.text = "${filtered.size} clients"
         binding.tvNoLeads.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
         binding.rvLeads.visibility = if (filtered.isEmpty()) View.GONE else View.VISIBLE
     }

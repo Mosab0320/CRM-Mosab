@@ -42,7 +42,7 @@ class DashboardFragment : Fragment() {
 
     private fun setupRecyclerViews() {
         binding.rvHotLeads.layoutManager = LinearLayoutManager(requireContext())
-        binding.rvUpcomingTasks.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvUpcomingTasks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvActivities.layoutManager = LinearLayoutManager(requireContext())
     }
 
@@ -63,20 +63,20 @@ class DashboardFragment : Fragment() {
         lifecycleScope.launch {
             val goal = withContext(Dispatchers.IO) { db.goalDao().getGoalsSync() }
             goal?.let {
-                binding.tvDealsGoal.text = "الهدف: ${it.dealsM}"
+                binding.tvDealsGoal.text = "Target: ${it.dealsM}"
                 updateGoalBars(0.0, 0, 0, it.commM, it.dealsM, it.leadsM)
             }
         }
     }
 
     private fun updateLeadStats(leads: List<Lead>) {
-        val active = leads.filter { it.stage != "تم الإغلاق" }
+        val active = leads.filter { it.stage != "Closed" }
         val today = java.time.LocalDate.now().toString()
         val todayLeads = leads.filter { it.date == today }
         binding.tvLeads.text = active.size.toString()
-        binding.tvNewLeads.text = "جديد اليوم: ${todayLeads.size}"
+        binding.tvNewLeads.text = "New today: ${todayLeads.size}"
 
-        val hotLeads = leads.filter { it.heat == "hot" && it.stage != "تم الإغلاق" }.take(4)
+        val hotLeads = leads.filter { it.heat == "hot" && it.stage != "Closed" }.take(4)
         binding.rvHotLeads.adapter = HotLeadMiniAdapter(hotLeads)
         binding.tvNoHotLeads.visibility = if (hotLeads.isEmpty()) View.VISIBLE else View.GONE
 
@@ -96,18 +96,18 @@ class DashboardFragment : Fragment() {
         val monthlyDeals = deals.filter { deal ->
             try {
                 val parts = deal.date.split("-")
-                parts[0].toInt() == year && parts[1].toInt() - 1 == month && deal.status == "مكتملة"
+                parts[0].toInt() == year && parts[1].toInt() - 1 == month && deal.status == "Completed"
             } catch (e: Exception) { false }
         }
         val monthlyComm = monthlyDeals.sumOf { it.myComm }
-        binding.tvCommission.text = "${formatNum(monthlyComm)} ج.م"
+        binding.tvCommission.text = "${formatNum(monthlyComm)} EGP"
         binding.tvDeals.text = monthlyDeals.size.toString()
 
         lifecycleScope.launch {
             val goal = withContext(Dispatchers.IO) { db.goalDao().getGoalsSync() }
             withContext(Dispatchers.Main) {
                 goal?.let {
-                    binding.tvDealsGoal.text = "الهدف: ${it.dealsM}"
+                    binding.tvDealsGoal.text = "Target: ${it.dealsM}"
                     val dealsPct = if (it.dealsM > 0) minOf(100, (monthlyDeals.size * 100 / it.dealsM)) else 0
                     val commPct = if (it.commM > 0) minOf(100, (monthlyComm / it.commM * 100).toInt()) else 0
                     binding.pbGoalDeals.progress = dealsPct
@@ -133,7 +133,7 @@ class DashboardFragment : Fragment() {
         val overdue = tasks.filter { !it.done && it.date.isNotEmpty() && it.date < now }.size
         val pending = tasks.filter { !it.done }.size
         binding.tvOverdue.text = overdue.toString()
-        binding.tvPending.text = "معلقة: $pending"
+        binding.tvPending.text = "Pending: $pending"
     }
 
     private fun showUpcomingTasks(tasks: List<CrmTask>) {
@@ -143,8 +143,8 @@ class DashboardFragment : Fragment() {
 
     private fun formatNum(n: Double): String {
         return when {
-            n >= 1_000_000 -> "${String.format("%.1f", n / 1_000_000)}م"
-            n >= 1_000 -> "${(n / 1_000).toInt()}ك"
+            n >= 1_000_000 -> "${String.format("%.1f", n / 1_000_000)}M"
+            n >= 1_000 -> "${(n / 1_000).toInt()}K"
             else -> n.toInt().toString()
         }
     }
@@ -170,10 +170,10 @@ class HotLeadMiniAdapter(private val leads: List<Lead>) : RecyclerView.Adapter<H
         val v = holder.itemView
         v.findViewById<TextView>(R.id.tv_avatar)?.text = lead.name.take(1)
         v.findViewById<TextView>(R.id.tv_name)?.text = lead.name
-        v.findViewById<TextView>(R.id.tv_info)?.text = "${lead.type} • ${lead.project.ifEmpty { "أي مشروع" }}"
+        v.findViewById<TextView>(R.id.tv_info)?.text = "${lead.type} • ${lead.project.ifEmpty { "Any Project" }}"
         v.findViewById<TextView>(R.id.tv_budget)?.text = when {
-            lead.budget >= 1_000_000 -> "${String.format("%.1f", lead.budget / 1_000_000)}م"
-            lead.budget >= 1_000 -> "${(lead.budget / 1_000).toInt()}ك"
+            lead.budget >= 1_000_000 -> "${String.format("%.1f", lead.budget / 1_000_000)}M"
+            lead.budget >= 1_000 -> "${(lead.budget / 1_000).toInt()}K"
             else -> lead.budget.toInt().toString()
         }
     }
@@ -194,15 +194,15 @@ class UpcomingTaskMiniAdapter(private val tasks: List<CrmTask>) : RecyclerView.A
         val v = holder.itemView
         v.findViewById<TextView>(R.id.tv_date)?.text = "📅 ${task.date.take(10)}"
         val icon = when(task.type) {
-            "مكالمة" -> "📞"; "معاينة" -> "🏠"; "اجتماع" -> "👥"
-            "متابعة" -> "🔄"; "أوراق وعقود" -> "📄"; else -> "📌"
+            "Call" -> "📞"; "Viewing" -> "🏠"; "Meeting" -> "👥"
+            "Follow-up" -> "🔄"; "Contracts" -> "📄"; else -> "📌"
         }
         v.findViewById<TextView>(R.id.tv_title)?.text = "$icon ${task.title}"
         v.findViewById<TextView>(R.id.tv_client)?.text = if (task.client.isNotEmpty()) "👤 ${task.client}" else ""
         val priorityView = v.findViewById<TextView>(R.id.tv_priority)
         priorityView?.text = task.priority
         val color = when(task.priority) {
-            "عاجلة" -> "#F4506A"; "مهمة" -> "#F59E2B"; else -> "#38C4F8"
+            "Urgent" -> "#F4506A"; "Important" -> "#F59E2B"; else -> "#38C4F8"
         }
         priorityView?.setTextColor(Color.parseColor(color))
     }

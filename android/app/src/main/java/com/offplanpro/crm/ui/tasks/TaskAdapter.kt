@@ -35,8 +35,8 @@ class TaskAdapter(
         val v = holder.itemView
 
         val icon = when(task.type) {
-            "مكالمة" -> "📞"; "معاينة" -> "🏠"; "اجتماع" -> "👥"
-            "متابعة" -> "🔄"; "أوراق وعقود" -> "📄"; "تسجيل" -> "📝"; else -> "📌"
+            "Call" -> "📞"; "Viewing" -> "🏠"; "Meeting" -> "👥"
+            "Follow-up" -> "🔄"; "Contracts" -> "📄"; "تسجيل" -> "📝"; else -> "📌"
         }
         v.findViewById<TextView>(R.id.tv_title)?.text = "$icon ${task.title}"
         v.findViewById<TextView>(R.id.tv_date)?.text = task.date.take(10)
@@ -46,7 +46,7 @@ class TaskAdapter(
         val priorityBadge = v.findViewById<TextView>(R.id.tv_priority_badge)
         priorityBadge?.text = task.priority
         val pColor = when(task.priority) {
-            "عاجلة" -> "#F4506A"; "مهمة" -> "#F59E2B"; else -> "#38C4F8"
+            "Urgent" -> "#F4506A"; "Important" -> "#F59E2B"; else -> "#38C4F8"
         }
         priorityBadge?.setTextColor(Color.parseColor(pColor))
 

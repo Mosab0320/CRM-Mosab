@@ -1,5 +1,6 @@
 package com.offplanpro.crm.ui.leads
 
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.offplanpro.crm.R
 import com.offplanpro.crm.data.entity.Lead
+import com.offplanpro.crm.ui.client.ClientProfileActivity
 
 class LeadAdapter(
     private val onDelete: (Lead) -> Unit,
@@ -56,21 +58,25 @@ class LeadAdapter(
         holder.tvPhone?.text = lead.phone
 
         val stageColor = when(lead.stage) {
-            "ليد جديد" -> "#38C4F8"; "تم التواصل" -> "#A78BFA"; "معاينة" -> "#F59E2B"
-            "عرض سعر" -> "#E2B96A"; "تفاوض" -> "#F4506A"; "تم الإغلاق" -> "#2DD4A0"
+            "New Lead" -> "#38C4F8"
+            "Contacted" -> "#A78BFA"
+            "Viewing" -> "#F59E2B"
+            "Offer" -> "#E2B96A"
+            "Negotiation" -> "#F4506A"
+            "Closed" -> "#2DD4A0"
             else -> "#8896B0"
         }
         holder.tvStageBadge?.text = lead.stage
         holder.tvStageBadge?.setTextColor(Color.parseColor(stageColor))
 
-        val heatText = when(lead.heat) { "hot" -> "🔥 ساخن"; "warm" -> "🟡 دافئ"; else -> "🔵 بارد" }
+        val heatText = when(lead.heat) { "hot" -> "🔥 Hot"; "warm" -> "🟡 Warm"; else -> "🔵 Cold" }
         val heatColor = when(lead.heat) { "hot" -> "#F4506A"; "warm" -> "#F59E2B"; else -> "#38C4F8" }
         holder.tvHeat?.text = heatText
         holder.tvHeat?.setTextColor(Color.parseColor(heatColor))
 
         holder.tvTypeBadge?.text = lead.type
         holder.tvBudget?.text = formatBudget(lead.budget)
-        holder.tvProject?.text = lead.project.ifEmpty { "أي مشروع" }
+        holder.tvProject?.text = lead.project.ifEmpty { "Any Project" }
         holder.tvSource?.text = lead.source
         holder.tvLastContact?.text = lead.lastContact.take(10)
 
@@ -78,14 +84,20 @@ class LeadAdapter(
         holder.btnCall?.setOnClickListener { onCall(lead) }
         holder.btnDelete?.setOnClickListener { onDelete(lead) }
         holder.itemView.setOnLongClickListener { onEdit(lead); true }
-        holder.itemView.setOnClickListener { onEdit(lead) }
+        holder.itemView.setOnClickListener {
+            val ctx = holder.itemView.context
+            val intent = Intent(ctx, ClientProfileActivity::class.java).apply {
+                putExtra(ClientProfileActivity.EXTRA_LEAD_ID, lead.id)
+            }
+            ctx.startActivity(intent)
+        }
     }
 
     private fun formatBudget(b: Double): String {
         return when {
-            b >= 1_000_000 -> "${String.format("%.1f", b / 1_000_000)}م ج.م"
-            b >= 1_000 -> "${(b / 1_000).toInt()}ك ج.م"
-            else -> "${b.toInt()} ج.م"
+            b >= 1_000_000 -> "${String.format("%.1f", b / 1_000_000)}M EGP"
+            b >= 1_000 -> "${(b / 1_000).toInt()}K EGP"
+            else -> "${b.toInt()} EGP"
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.offplanpro.crm
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import com.offplanpro.crm.ui.followups.FollowUpsFragment
 import com.offplanpro.crm.ui.leads.LeadsFragment
 import com.offplanpro.crm.ui.pipeline.PipelineFragment
 import com.offplanpro.crm.ui.projects.ProjectsFragment
+import com.offplanpro.crm.ui.settings.SettingsActivity
 import com.offplanpro.crm.ui.tasks.TasksFragment
 import com.offplanpro.crm.ui.units.UnitsFragment
 
@@ -40,6 +42,10 @@ class MainActivity : AppCompatActivity() {
             }
             loadFragment(fragment)
             true
+        }
+
+        binding.btnSettings.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 

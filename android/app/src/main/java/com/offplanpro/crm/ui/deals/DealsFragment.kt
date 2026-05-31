@@ -28,16 +28,16 @@ class DealsFragment : Fragment() {
 
         db.dealDao().getAllDeals().observe(viewLifecycleOwner) { deals ->
             adapter.submitList(deals)
-            val completed = deals.filter { it.status == "مكتملة" }
+            val completed = deals.filter { it.status == "Completed" }
             val totalComm = completed.sumOf { it.myComm }
-            binding.tvTotalComm.text = "${formatNum(totalComm)} ج.م"
+            binding.tvTotalComm.text = "${formatNum(totalComm)} EGP"
             binding.tvCompletedDeals?.text = completed.size.toString()
             binding.tvNoDeals.visibility = if (deals.isEmpty()) View.VISIBLE else View.GONE
             binding.rvDeals.visibility = if (deals.isEmpty()) View.GONE else View.VISIBLE
         }
 
         binding.fabAdd.setOnClickListener {
-            android.widget.Toast.makeText(requireContext(), "إضافة صفقة - قريباً", android.widget.Toast.LENGTH_SHORT).show()
+            AddDealBottomSheet.newInstance().show(childFragmentManager, "add_deal")
         }
     }
 

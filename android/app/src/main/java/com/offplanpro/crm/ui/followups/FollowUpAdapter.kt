@@ -42,7 +42,7 @@ class FollowUpAdapter(
 
         val statusBadge = v.findViewById<TextView>(R.id.tv_status_badge)
         if (fu.status == "done") {
-            statusBadge?.text = "مكتملة"
+            statusBadge?.text = "Completed"
             statusBadge?.setTextColor(Color.parseColor("#2DD4A0"))
             statusBadge?.setBackgroundColor(Color.parseColor("#202DD4A0"))
             v.alpha = 0.6f

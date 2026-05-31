@@ -38,7 +38,7 @@ class TasksFragment : Fragment() {
                     db.activityDao().insert(ActivityItem(
                         text = "تم إتمام: ${task.title}",
                         color = "#2DD4A0",
-                        time = "الآن"
+                        time = "Now"
                     ))
                 }
             }

@@ -46,11 +46,11 @@ class GoalsFragment : Fragment() {
         val year = cal.get(Calendar.YEAR)
 
         val monthlyDeals = allDeals.filter { d ->
-            try { val p = d.date.split("-"); p[0].toInt() == year && p[1].toInt() - 1 == month && d.status == "مكتملة" }
+            try { val p = d.date.split("-"); p[0].toInt() == year && p[1].toInt() - 1 == month && d.status == "Completed" }
             catch (e: Exception) { false }
         }
         val yearlyDeals = allDeals.filter { d ->
-            try { val p = d.date.split("-"); p[0].toInt() == year && d.status == "مكتملة" }
+            try { val p = d.date.split("-"); p[0].toInt() == year && d.status == "Completed" }
             catch (e: Exception) { false }
         }
         val mComm = monthlyDeals.sumOf { it.myComm }
@@ -60,7 +60,7 @@ class GoalsFragment : Fragment() {
         val commMPct = if (goal.commM > 0) minOf(100, (mComm / goal.commM * 100).toInt()) else 0
         binding.tvCommMPct.text = "$commMPct%"
         binding.pbCommM.progress = commMPct
-        binding.tvCommMDetail.text = "${formatNum(mComm)} / ${formatNum(goal.commM)} ج.م"
+        binding.tvCommMDetail.text = "${formatNum(mComm)} / ${formatNum(goal.commM)} EGP"
 
         // Monthly deals
         val dealsMPct = if (goal.dealsM > 0) minOf(100, monthlyDeals.size * 100 / goal.dealsM) else 0
@@ -72,7 +72,7 @@ class GoalsFragment : Fragment() {
         val commYPct = if (goal.commY > 0) minOf(100, (yComm / goal.commY * 100).toInt()) else 0
         binding.tvCommYPct.text = "$commYPct%"
         binding.pbCommY.progress = commYPct
-        binding.tvCommYDetail.text = "${formatNum(yComm)} / ${formatNum(goal.commY)} ج.م"
+        binding.tvCommYDetail.text = "${formatNum(yComm)} / ${formatNum(goal.commY)} EGP"
 
         // Yearly deals
         val dealsYPct = if (goal.dealsY > 0) minOf(100, yearlyDeals.size * 100 / goal.dealsY) else 0
