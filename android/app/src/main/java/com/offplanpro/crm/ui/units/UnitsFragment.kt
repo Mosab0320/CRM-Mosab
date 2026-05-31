@@ -42,13 +42,13 @@ class UnitsFragment : Fragment() {
     }
 
     private fun setupSpinners() {
-        val types = listOf("كل الأنواع", "Apartment", "Duplex", "Penthouse", "Villa", "تاون هاوس", "مكتب")
-        val statuses = listOf("كل الحالات", "متاح", "محجوز", "مباع")
+        val types = listOf("All Types", "Apartment", "Duplex", "Penthouse", "Villa", "Townhouse", "Office")
+        val statuses = listOf("All Status", "Available", "Reserved", "Sold")
 
         lifecycleScope.launch(Dispatchers.IO) {
             val projectNames = db.projectDao().getProjectNames()
             withContext(Dispatchers.Main) {
-                val projects = listOf("كل المشاريع") + projectNames
+                val projects = listOf("All Projects") + projectNames
                 binding.spinnerProject.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, projects)
                 binding.spinnerType.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
                 binding.spinnerStatus.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, statuses)
@@ -69,9 +69,9 @@ class UnitsFragment : Fragment() {
         val type = binding.spinnerType.selectedItem?.toString() ?: ""
         val status = binding.spinnerStatus.selectedItem?.toString() ?: ""
         val filtered = allUnits.filter { unit ->
-            (project == "كل المشاريع" || unit.project == project) &&
-            (type == "كل الأنواع" || unit.type == type) &&
-            (status == "كل الحالات" || unit.status == status)
+            (project == "All Projects" || unit.project == project) &&
+            (type == "All Types" || unit.type == type) &&
+            (status == "All Status" || unit.status == status)
         }
         adapter.submitList(filtered)
         binding.tvNoUnits.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE

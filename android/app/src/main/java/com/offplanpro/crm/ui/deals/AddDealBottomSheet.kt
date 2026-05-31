@@ -48,7 +48,7 @@ class AddDealBottomSheet : BottomSheetDialogFragment() {
         val statuses = arrayOf("Completed", "Ongoing", "Cancelled")
         spStatus?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, statuses)
             .also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
-        spStatus?.setSelection(1) // default to جارية
+        spStatus?.setSelection(1) // default to Ongoing
 
         val calcComm = {
             val v = etValue?.text?.toString()?.toDoubleOrNull() ?: 0.0
@@ -74,7 +74,7 @@ class AddDealBottomSheet : BottomSheetDialogFragment() {
             val project = etProject?.text?.toString()?.trim() ?: ""
             val value = etValue?.text?.toString()?.toDoubleOrNull() ?: 0.0
             if (client.isEmpty() || project.isEmpty() || value == 0.0) {
-                Toast.makeText(requireContext(), "يرجى ملء الحقول المطلوبة", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Please fill in required fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val commPct = etCommPct?.text?.toString()?.toDoubleOrNull() ?: 3.0
@@ -85,7 +85,7 @@ class AddDealBottomSheet : BottomSheetDialogFragment() {
                 client = client,
                 project = project,
                 unit = etUnit?.text?.toString()?.trim() ?: "",
-                type = "بيع أوف بلان",
+                type = "Off-Plan Sale",
                 value = value,
                 commPct = commPct,
                 commTotal = commTotal,
@@ -100,7 +100,7 @@ class AddDealBottomSheet : BottomSheetDialogFragment() {
             lifecycleScope.launch(Dispatchers.IO) {
                 db.dealDao().insert(deal)
                 db.activityDao().insert(ActivityItem(
-                    text = "صفقة جديدة: $client — $project 💰",
+                    text = "New deal: $client — $project 💰",
                     color = "#E2B96A",
                     time = "Now"
                 ))
@@ -112,8 +112,8 @@ class AddDealBottomSheet : BottomSheetDialogFragment() {
 
     private fun formatNum(n: Double): String {
         return when {
-            n >= 1_000_000 -> "${String.format("%.1f", n / 1_000_000)}م"
-            n >= 1_000 -> "${(n / 1_000).toInt()}ك"
+            n >= 1_000_000 -> "${String.format("%.1f", n / 1_000_000)}M"
+            n >= 1_000 -> "${(n / 1_000).toInt()}K"
             else -> n.toInt().toString()
         }
     }

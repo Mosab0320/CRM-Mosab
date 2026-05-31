@@ -18,7 +18,7 @@ data class Deal(
     val myComm: Double = 0.0,
     val date: String = "",
     val collectDate: String = "",
-    val status: String = "جارية", // مكتملة / جارية / ملغاة
+    val status: String = "Ongoing", // Completed / Ongoing / Cancelled
     val contractStage: String = "",
     val notes: String = ""
 )

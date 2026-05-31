@@ -73,7 +73,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="النوع"
+                    android:text="Type"
                     android:textSize="9sp"
                     android:textColor="@color/text_tertiary" />
                 <TextView
@@ -92,7 +92,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="المساحة"
+                    android:text="Area"
                     android:textSize="9sp"
                     android:textColor="@color/text_tertiary" />
                 <TextView
@@ -111,7 +111,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="غرف"
+                    android:text="Rooms"
                     android:textSize="9sp"
                     android:textColor="@color/text_tertiary" />
                 <TextView
@@ -130,7 +130,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="السعر"
+                    android:text="Price"
                     android:textSize="9sp"
                     android:textColor="@color/text_tertiary" />
                 <TextView

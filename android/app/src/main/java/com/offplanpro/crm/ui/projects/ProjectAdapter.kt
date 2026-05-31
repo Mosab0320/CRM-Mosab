@@ -30,17 +30,17 @@ class ProjectAdapter : ListAdapter<Project, ProjectAdapter.VH>(DIFF) {
         v.findViewById<TextView>(R.id.tv_project_name)?.text = project.name
         v.findViewById<TextView>(R.id.tv_developer)?.text = project.developer
         v.findViewById<TextView>(R.id.tv_location)?.text = "📍 ${project.location}"
-        v.findViewById<TextView>(R.id.tv_delivery)?.text = "تسليم: ${project.delivery.take(7)}"
-        v.findViewById<TextView>(R.id.tv_comm_badge)?.text = "${project.comm}% عمولة"
+        v.findViewById<TextView>(R.id.tv_delivery)?.text = "Delivery: ${project.delivery.take(7)}"
+        v.findViewById<TextView>(R.id.tv_comm_badge)?.text = "${project.comm}% comm"
         v.findViewById<TextView>(R.id.tv_price_range)?.text = "${formatPrice(project.priceFrom)} — ${formatPrice(project.priceTo)}"
         v.findViewById<TextView>(R.id.tv_down)?.text = "${project.down}%"
-        v.findViewById<TextView>(R.id.tv_years)?.text = "${project.years} سنة"
+        v.findViewById<TextView>(R.id.tv_years)?.text = "${project.years} yrs"
     }
 
     private fun formatPrice(p: Double): String {
         return when {
-            p >= 1_000_000 -> "${String.format("%.1f", p / 1_000_000)}م"
-            p >= 1_000 -> "${(p / 1_000).toInt()}ك"
+            p >= 1_000_000 -> "${String.format("%.1f", p / 1_000_000)}M"
+            p >= 1_000 -> "${(p / 1_000).toInt()}K"
             else -> "${p.toInt()}"
         }
     }

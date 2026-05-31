@@ -36,7 +36,7 @@ class TaskAdapter(
 
         val icon = when(task.type) {
             "Call" -> "📞"; "Viewing" -> "🏠"; "Meeting" -> "👥"
-            "Follow-up" -> "🔄"; "Contracts" -> "📄"; "تسجيل" -> "📝"; else -> "📌"
+            "Follow-up" -> "🔄"; "Contracts" -> "📄"; "Register" -> "📝"; else -> "📌"
         }
         v.findViewById<TextView>(R.id.tv_title)?.text = "$icon ${task.title}"
         v.findViewById<TextView>(R.id.tv_date)?.text = task.date.take(10)
@@ -60,10 +60,10 @@ class TaskAdapter(
 
         val btnDone = v.findViewById<Button>(R.id.btn_mark_done)
         if (task.done) {
-            btnDone?.text = "↩ إلغاء الإنجاز"
+            btnDone?.text = "↩ Undo"
             v.alpha = 0.5f
         } else {
-            btnDone?.text = "✓ تم الإنجاز"
+            btnDone?.text = "✓ Done"
             v.alpha = 1f
         }
         btnDone?.visibility = View.VISIBLE

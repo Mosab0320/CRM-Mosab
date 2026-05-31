@@ -44,7 +44,7 @@ class AddFollowUpBottomSheet : BottomSheetDialogFragment() {
         val btnSave = view.findViewById<Button>(R.id.btn_save)
         val btnCancel = view.findViewById<Button>(R.id.btn_cancel)
 
-        val types = arrayOf("مكالمة هاتفية", "WhatsApp", "زيارة", "Email", "Meeting")
+        val types = arrayOf("Phone Call", "WhatsApp", "Visit", "Email", "Meeting")
         spType?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
             .also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
         etDate?.setText(LocalDate.now().toString())
@@ -69,13 +69,13 @@ class AddFollowUpBottomSheet : BottomSheetDialogFragment() {
         btnSave?.setOnClickListener {
             val client = etClient?.text?.toString()?.trim() ?: ""
             if (client.isEmpty()) {
-                Toast.makeText(requireContext(), "اسم العميل مطلوب", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Client name is required", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val fu = FollowUp(
                 id = editFollowUp?.id ?: 0,
                 client = client,
-                type = spType?.selectedItem?.toString() ?: "مكالمة هاتفية",
+                type = spType?.selectedItem?.toString() ?: "Phone Call",
                 date = etDate?.text?.toString() ?: LocalDate.now().toString(),
                 nextDate = etNextDate?.text?.toString() ?: "",
                 notes = etNotes?.text?.toString() ?: "",

@@ -16,6 +16,6 @@ data class Project(
     val down: Double = 0.0,
     val years: Int = 0,
     val comm: Double = 0.0,
-    val status: String = "متاح",
+    val status: String = "Available",
     val desc: String = ""
 )

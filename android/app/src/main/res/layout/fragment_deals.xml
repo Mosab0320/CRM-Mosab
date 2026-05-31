@@ -44,14 +44,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="إجمالي العمولات"
+                        android:text="Total Commission"
                         android:textSize="10sp"
                         android:textColor="@color/text_tertiary" />
                     <TextView
                         android:id="@+id/tv_total_comm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0 ج.م"
+                        android:text="0 EGP"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/gold" />
@@ -71,7 +71,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="صفقات مكتملة"
+                        android:text="Completed Deals"
                         android:textSize="10sp"
                         android:textColor="@color/text_tertiary" />
                     <TextView
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="لا توجد صفقات"
+            android:text="No deals yet"
             android:textColor="@color/text_tertiary"
             android:textSize="16sp"
             android:gravity="center"
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:contentDescription="إضافة صفقة"
+        android:contentDescription="Add Deal"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/gold"
         app:tint="@color/background" />

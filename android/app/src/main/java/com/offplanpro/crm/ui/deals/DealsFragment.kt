@@ -43,8 +43,8 @@ class DealsFragment : Fragment() {
 
     private fun formatNum(n: Double): String {
         return when {
-            n >= 1_000_000 -> "${String.format("%.1f", n / 1_000_000)}م"
-            n >= 1_000 -> "${(n / 1_000).toInt()}ك"
+            n >= 1_000_000 -> "${String.format("%.1f", n / 1_000_000)}M"
+            n >= 1_000 -> "${(n / 1_000).toInt()}K"
             else -> n.toInt().toString()
         }
     }

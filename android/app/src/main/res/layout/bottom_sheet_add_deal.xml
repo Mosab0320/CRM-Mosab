@@ -26,26 +26,26 @@
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="العميل *" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Client *" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <EditText android:id="@+id/et_client"
                     android:layout_width="match_parent" android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
                     android:padding="12dp" android:textSize="13sp" android:inputType="text"
-                    android:hint="اسم العميل" />
+                    android:hint="Client name" />
             </LinearLayout>
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="المشروع *" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Project *" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <EditText android:id="@+id/et_project"
                     android:layout_width="match_parent" android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
                     android:padding="12dp" android:textSize="13sp" android:inputType="text"
-                    android:hint="اسم المشروع" />
+                    android:hint="Project name" />
             </LinearLayout>
         </LinearLayout>
 
@@ -54,19 +54,19 @@
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="الوحدة" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Unit" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <EditText android:id="@+id/et_unit"
                     android:layout_width="match_parent" android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
                     android:padding="12dp" android:textSize="13sp" android:inputType="text"
-                    android:hint="كود الوحدة" />
+                    android:hint="Unit code" />
             </LinearLayout>
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="الحالة" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Status" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <Spinner android:id="@+id/spinner_status"
                     android:layout_width="match_parent" android:layout_height="48dp"
@@ -75,7 +75,7 @@
         </LinearLayout>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="قيمة الصفقة (ج.م) *" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:text="Deal Value (EGP) *" android:textSize="12sp" android:textColor="@color/text_secondary"
             android:layout_marginBottom="4dp" />
         <EditText android:id="@+id/et_value"
             android:layout_width="match_parent" android:layout_height="48dp"
@@ -89,7 +89,7 @@
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="عمولة %" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Commission %" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <EditText android:id="@+id/et_comm_pct"
                     android:layout_width="match_parent" android:layout_height="48dp"
@@ -101,7 +101,7 @@
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="نسبتي %" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="My share %" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <EditText android:id="@+id/et_my_pct"
                     android:layout_width="match_parent" android:layout_height="48dp"
@@ -117,26 +117,26 @@
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="إجمالي العمولة" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Total Commission" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <TextView android:id="@+id/tv_comm_total"
                     android:layout_width="match_parent" android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:textColor="@color/gold" android:gravity="center_vertical|end"
                     android:padding="12dp" android:textSize="13sp" android:textStyle="bold"
-                    android:text="0 ج.م" />
+                    android:text="0 EGP" />
             </LinearLayout>
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="عمولتي" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="My Comm" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <TextView android:id="@+id/tv_my_comm"
                     android:layout_width="match_parent" android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:textColor="@color/emerald" android:gravity="center_vertical|end"
                     android:padding="12dp" android:textSize="13sp" android:textStyle="bold"
-                    android:text="0 ج.م" />
+                    android:text="0 EGP" />
             </LinearLayout>
         </LinearLayout>
 

@@ -45,8 +45,8 @@ class DealAdapter : ListAdapter<Deal, DealAdapter.VH>(DIFF) {
 
     private fun formatPrice(p: Double): String {
         return when {
-            p >= 1_000_000 -> "${String.format("%.1f", p / 1_000_000)}م EGP"
-            p >= 1_000 -> "${(p / 1_000).toInt()}ك EGP"
+            p >= 1_000_000 -> "${String.format("%.1f", p / 1_000_000)}M EGP"
+            p >= 1_000 -> "${(p / 1_000).toInt()}K EGP"
             else -> "${p.toInt()} EGP"
         }
     }

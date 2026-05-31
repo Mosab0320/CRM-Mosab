@@ -37,7 +37,7 @@ class FollowUpAdapter(
         v.findViewById<TextView>(R.id.tv_client)?.text = fu.client
         v.findViewById<TextView>(R.id.tv_type_badge)?.text = fu.type
         v.findViewById<TextView>(R.id.tv_date)?.text = "📅 ${fu.date}"
-        v.findViewById<TextView>(R.id.tv_next_date)?.text = if (fu.nextDate.isNotEmpty()) "التالي: ${fu.nextDate}" else ""
+        v.findViewById<TextView>(R.id.tv_next_date)?.text = if (fu.nextDate.isNotEmpty()) "Next: ${fu.nextDate}" else ""
         v.findViewById<TextView>(R.id.tv_notes)?.text = fu.notes.ifEmpty { "" }
 
         val statusBadge = v.findViewById<TextView>(R.id.tv_status_badge)
@@ -47,14 +47,14 @@ class FollowUpAdapter(
             statusBadge?.setBackgroundColor(Color.parseColor("#202DD4A0"))
             v.alpha = 0.6f
         } else {
-            statusBadge?.text = "معلقة"
+            statusBadge?.text = "Pending"
             statusBadge?.setTextColor(Color.parseColor("#F59E2B"))
             statusBadge?.setBackgroundColor(Color.parseColor("#20F59E2B"))
             v.alpha = 1f
         }
 
         val btnDone = v.findViewById<Button>(R.id.btn_done)
-        btnDone?.text = if (fu.status == "done") "↩ إعادة" else "✓ تم"
+        btnDone?.text = if (fu.status == "done") "↩ Undo" else "✓ Done"
         btnDone?.setOnClickListener { onMarkDone(fu) }
     }
 }

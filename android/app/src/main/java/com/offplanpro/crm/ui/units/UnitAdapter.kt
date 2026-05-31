@@ -31,23 +31,23 @@ class UnitAdapter : ListAdapter<CrmUnit, UnitAdapter.VH>(DIFF) {
         v.findViewById<TextView>(R.id.tv_code)?.text = unit.code
         v.findViewById<TextView>(R.id.tv_project_name)?.text = unit.project
         v.findViewById<TextView>(R.id.tv_type)?.text = unit.type
-        v.findViewById<TextView>(R.id.tv_area)?.text = "${unit.area.toInt()} م²"
-        v.findViewById<TextView>(R.id.tv_rooms)?.text = "${unit.rooms} غرف"
+        v.findViewById<TextView>(R.id.tv_area)?.text = "${unit.area.toInt()} m²"
+        v.findViewById<TextView>(R.id.tv_rooms)?.text = "${unit.rooms} rooms"
         v.findViewById<TextView>(R.id.tv_price)?.text = formatPrice(unit.price)
         v.findViewById<TextView>(R.id.tv_desc)?.text = unit.desc
         val statusView = v.findViewById<TextView>(R.id.tv_status_badge)
         statusView?.text = unit.status
         when (unit.status) {
-            "متاح" -> { statusView?.setTextColor(Color.parseColor("#2DD4A0")); statusView?.setBackgroundColor(Color.parseColor("#202DD4A0")) }
-            "محجوز" -> { statusView?.setTextColor(Color.parseColor("#F59E2B")); statusView?.setBackgroundColor(Color.parseColor("#20F59E2B")) }
-            "مباع" -> { statusView?.setTextColor(Color.parseColor("#F4506A")); statusView?.setBackgroundColor(Color.parseColor("#20F4506A")) }
+            "Available" -> { statusView?.setTextColor(Color.parseColor("#2DD4A0")); statusView?.setBackgroundColor(Color.parseColor("#202DD4A0")) }
+            "Reserved" -> { statusView?.setTextColor(Color.parseColor("#F59E2B")); statusView?.setBackgroundColor(Color.parseColor("#20F59E2B")) }
+            "Sold" -> { statusView?.setTextColor(Color.parseColor("#F4506A")); statusView?.setBackgroundColor(Color.parseColor("#20F4506A")) }
         }
     }
 
     private fun formatPrice(p: Double): String {
         return when {
-            p >= 1_000_000 -> "${String.format("%.1f", p / 1_000_000)}م EGP"
-            p >= 1_000 -> "${(p / 1_000).toInt()}ك EGP"
+            p >= 1_000_000 -> "${String.format("%.1f", p / 1_000_000)}M EGP"
+            p >= 1_000 -> "${(p / 1_000).toInt()}K EGP"
             else -> "${p.toInt()} EGP"
         }
     }

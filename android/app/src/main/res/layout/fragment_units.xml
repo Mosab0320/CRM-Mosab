@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="الوحدات المتاحة"
+            android:text="Available Units"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="لا توجد وحدات"
+            android:text="No units found"
             android:textColor="@color/text_tertiary"
             android:textSize="16sp"
             android:gravity="center"

@@ -47,7 +47,7 @@ class AddTaskBottomSheet : BottomSheetDialogFragment() {
         val btnSave = view.findViewById<Button>(R.id.btn_save)
         val btnCancel = view.findViewById<Button>(R.id.btn_cancel)
 
-        val types = arrayOf("Call", "Viewing", "Meeting", "Follow-up", "Contracts", "تسجيل")
+        val types = arrayOf("Call", "Viewing", "Meeting", "Follow-up", "Contracts", "Register")
         val priorities = arrayOf("Normal", "Important", "Urgent")
         spType?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
             .also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
@@ -59,7 +59,7 @@ class AddTaskBottomSheet : BottomSheetDialogFragment() {
 
         val taskId = arguments?.getLong(ARG_TASK_ID)
         if (taskId != null && taskId > 0L) {
-            view.findViewById<TextView>(R.id.tv_sheet_title)?.text = "تعديل مهمة"
+            view.findViewById<TextView>(R.id.tv_sheet_title)?.text = "Edit Task"
             lifecycleScope.launch(Dispatchers.IO) {
                 val task = db.taskDao().getAllTasksList().find { it.id == taskId }
                 task?.let {
@@ -80,7 +80,7 @@ class AddTaskBottomSheet : BottomSheetDialogFragment() {
         btnSave?.setOnClickListener {
             val title = etTitle?.text?.toString()?.trim() ?: ""
             if (title.isEmpty()) {
-                Toast.makeText(requireContext(), "عنوان المهمة مطلوب", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Task title is required", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val task = CrmTask(

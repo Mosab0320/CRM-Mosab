@@ -79,7 +79,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="قيمة الصفقة"
+                    android:text="Deal Value"
                     android:textSize="9sp"
                     android:textColor="@color/text_tertiary" />
                 <TextView
@@ -99,7 +99,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="عمولتي"
+                    android:text="My Comm"
                     android:textSize="9sp"
                     android:textColor="@color/text_tertiary" />
                 <TextView
@@ -119,7 +119,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="التاريخ"
+                    android:text="Date"
                     android:textSize="9sp"
                     android:textColor="@color/text_tertiary" />
                 <TextView

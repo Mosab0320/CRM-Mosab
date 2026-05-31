@@ -36,7 +36,7 @@ class TasksFragment : Fragment() {
                 lifecycleScope.launch(Dispatchers.IO) {
                     db.taskDao().update(task.copy(done = true))
                     db.activityDao().insert(ActivityItem(
-                        text = "تم إتمام: ${task.title}",
+                        text = "Completed: ${task.title}",
                         color = "#2DD4A0",
                         time = "Now"
                     ))
@@ -76,7 +76,7 @@ class TasksFragment : Fragment() {
         val filtered = if (showPending) allTasks.filter { !it.done }.sortedBy { it.date }
                        else allTasks.filter { it.done }
         adapter.submitList(filtered)
-        val noMsg = if (showPending) "ما شاء الله! لا مهام معلقة 🎉" else "لا توجد مهام مكتملة"
+        val noMsg = if (showPending) "All caught up! No pending tasks 🎉" else "No completed tasks"
         binding.tvNoTasks.text = noMsg
         binding.tvNoTasks.visibility = if (filtered.isEmpty()) View.VISIBLE else View.GONE
         binding.rvTasks.visibility = if (filtered.isEmpty()) View.GONE else View.VISIBLE

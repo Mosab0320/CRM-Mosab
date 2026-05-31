@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="سجل كل تواصل مع عملائك"
+                android:text="Log all client interactions"
                 android:textSize="12sp"
                 android:textColor="@color/text_tertiary" />
         </LinearLayout>
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="لا توجد متابعات"
+            android:text="No follow-ups yet"
             android:textColor="@color/text_tertiary"
             android:textSize="16sp"
             android:gravity="center"
@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"
-        android:contentDescription="إضافة متابعة"
+        android:contentDescription="Add Follow-up"
         android:src="@android:drawable/ic_input_add"
         app:backgroundTint="@color/gold"
         app:tint="@color/background" />

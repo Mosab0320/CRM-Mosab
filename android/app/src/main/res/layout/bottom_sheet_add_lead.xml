@@ -16,31 +16,31 @@
             android:id="@+id/tv_sheet_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="إضافة عميل جديد"
+            android:text="Add New Client"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"
             android:layout_marginBottom="16dp" />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="الاسم *" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:text="Name *" android:textSize="12sp" android:textColor="@color/text_secondary"
             android:layout_marginBottom="4dp" />
         <EditText android:id="@+id/et_name"
             android:layout_width="match_parent" android:layout_height="48dp"
             android:background="@drawable/bg_input"
             android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
             android:padding="12dp" android:textSize="13sp" android:inputType="text"
-            android:hint="اسم العميل" android:layout_marginBottom="12dp" />
+            android:hint="Client name" android:layout_marginBottom="12dp" />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="الهاتف *" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:text="Phone *" android:textSize="12sp" android:textColor="@color/text_secondary"
             android:layout_marginBottom="4dp" />
         <EditText android:id="@+id/et_phone"
             android:layout_width="match_parent" android:layout_height="48dp"
             android:background="@drawable/bg_input"
             android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
             android:padding="12dp" android:textSize="13sp" android:inputType="phone"
-            android:hint="رقم الهاتف" android:layout_marginBottom="12dp"
+            android:hint="Phone number" android:layout_marginBottom="12dp"
             android:textDirection="ltr" />
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="النوع" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Type" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <Spinner android:id="@+id/spinner_type"
                     android:layout_width="match_parent" android:layout_height="48dp"
@@ -57,7 +57,7 @@
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="الحرارة" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Heat" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <Spinner android:id="@+id/spinner_heat"
                     android:layout_width="match_parent" android:layout_height="48dp"
@@ -66,7 +66,7 @@
         </LinearLayout>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="المرحلة" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:text="Stage" android:textSize="12sp" android:textColor="@color/text_secondary"
             android:layout_marginBottom="4dp" />
         <Spinner android:id="@+id/spinner_stage"
             android:layout_width="match_parent" android:layout_height="48dp"
@@ -74,7 +74,7 @@
             android:layout_marginBottom="12dp" />
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="الميزانية (ج.م)" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:text="Budget (EGP)" android:textSize="12sp" android:textColor="@color/text_secondary"
             android:layout_marginBottom="4dp" />
         <EditText android:id="@+id/et_budget"
             android:layout_width="match_parent" android:layout_height="48dp"
@@ -88,26 +88,26 @@
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="المشروع" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Project" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <EditText android:id="@+id/et_project"
                     android:layout_width="match_parent" android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
                     android:padding="12dp" android:textSize="13sp" android:inputType="text"
-                    android:hint="اسم المشروع" />
+                    android:hint="Project name" />
             </LinearLayout>
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="نوع الوحدة" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Unit Type" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <EditText android:id="@+id/et_unit_type"
                     android:layout_width="match_parent" android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
                     android:padding="12dp" android:textSize="13sp" android:inputType="text"
-                    android:hint="شقة" />
+                    android:hint="Apartment" />
             </LinearLayout>
         </LinearLayout>
 
@@ -116,38 +116,38 @@
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="المصدر" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Source" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <EditText android:id="@+id/et_source"
                     android:layout_width="match_parent" android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
                     android:padding="12dp" android:textSize="13sp" android:inputType="text"
-                    android:hint="إنستغرام" />
+                    android:hint="Instagram" />
             </LinearLayout>
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                 android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="الجنسية" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:text="Nationality" android:textSize="12sp" android:textColor="@color/text_secondary"
                     android:layout_marginBottom="4dp" />
                 <EditText android:id="@+id/et_nationality"
                     android:layout_width="match_parent" android:layout_height="48dp"
                     android:background="@drawable/bg_input"
                     android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
                     android:padding="12dp" android:textSize="13sp" android:inputType="text"
-                    android:hint="مصري" />
+                    android:hint="Egyptian" />
             </LinearLayout>
         </LinearLayout>
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="ملاحظات" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:text="Notes" android:textSize="12sp" android:textColor="@color/text_secondary"
             android:layout_marginBottom="4dp" />
         <EditText android:id="@+id/et_notes"
             android:layout_width="match_parent" android:layout_height="80dp"
             android:background="@drawable/bg_input"
             android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
             android:padding="12dp" android:textSize="13sp" android:inputType="textMultiLine"
-            android:gravity="top|end" android:hint="ملاحظات إضافية"
+            android:gravity="top|end" android:hint="Additional notes"
             android:layout_marginBottom="16dp" />
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"

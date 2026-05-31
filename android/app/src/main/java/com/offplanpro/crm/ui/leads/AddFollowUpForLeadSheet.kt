@@ -48,19 +48,19 @@ class AddFollowUpForLeadSheet : BottomSheetDialogFragment() {
         etClient?.setText(clientName)
         etDate?.setText(LocalDate.now().toString())
 
-        val types = arrayOf("مكالمة هاتفية", "WhatsApp", "زيارة", "Email", "Meeting")
+        val types = arrayOf("Phone Call", "WhatsApp", "Visit", "Email", "Meeting")
         spType?.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, types)
             .also { it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item) }
 
         btnSave?.setOnClickListener {
             val client = etClient?.text?.toString()?.trim() ?: ""
             if (client.isEmpty()) {
-                Toast.makeText(requireContext(), "اسم العميل مطلوب", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Client name is required", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             val followUp = FollowUp(
                 client = client,
-                type = spType?.selectedItem?.toString() ?: "مكالمة هاتفية",
+                type = spType?.selectedItem?.toString() ?: "Phone Call",
                 date = etDate?.text?.toString() ?: LocalDate.now().toString(),
                 nextDate = etNextDate?.text?.toString() ?: "",
                 notes = etNotes?.text?.toString() ?: "",
@@ -69,7 +69,7 @@ class AddFollowUpForLeadSheet : BottomSheetDialogFragment() {
             lifecycleScope.launch(Dispatchers.IO) {
                 db.followUpDao().insert(followUp)
                 db.activityDao().insert(ActivityItem(
-                    text = "متابعة مع $client",
+                    text = "Follow-up with $client",
                     color = "#38C4F8",
                     time = "Now"
                 ))

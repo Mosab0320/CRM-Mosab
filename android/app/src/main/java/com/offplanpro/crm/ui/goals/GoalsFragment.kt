@@ -66,7 +66,7 @@ class GoalsFragment : Fragment() {
         val dealsMPct = if (goal.dealsM > 0) minOf(100, monthlyDeals.size * 100 / goal.dealsM) else 0
         binding.tvDealsMPct.text = "$dealsMPct%"
         binding.pbDealsM.progress = dealsMPct
-        binding.tvDealsMDetail.text = "${monthlyDeals.size} / ${goal.dealsM} صفقة"
+        binding.tvDealsMDetail.text = "${monthlyDeals.size} / ${goal.dealsM} deals"
 
         // Yearly commission
         val commYPct = if (goal.commY > 0) minOf(100, (yComm / goal.commY * 100).toInt()) else 0
@@ -78,7 +78,7 @@ class GoalsFragment : Fragment() {
         val dealsYPct = if (goal.dealsY > 0) minOf(100, yearlyDeals.size * 100 / goal.dealsY) else 0
         binding.tvDealsYPct.text = "$dealsYPct%"
         binding.pbDealsY.progress = dealsYPct
-        binding.tvDealsYDetail.text = "${yearlyDeals.size} / ${goal.dealsY} صفقة"
+        binding.tvDealsYDetail.text = "${yearlyDeals.size} / ${goal.dealsY} deals"
     }
 
     private fun updateLeadsGoal(count: Int) {
@@ -86,13 +86,13 @@ class GoalsFragment : Fragment() {
         val pct = if (goal.leadsM > 0) minOf(100, count * 100 / goal.leadsM) else 0
         binding.tvLeadsMPct.text = "$pct%"
         binding.pbLeadsM.progress = pct
-        binding.tvLeadsMDetail.text = "$count / ${goal.leadsM} ليد"
+        binding.tvLeadsMDetail.text = "$count / ${goal.leadsM} leads"
     }
 
     private fun formatNum(n: Double): String {
         return when {
-            n >= 1_000_000 -> "${String.format("%.1f", n / 1_000_000)}م"
-            n >= 1_000 -> "${(n / 1_000).toInt()}ك"
+            n >= 1_000_000 -> "${String.format("%.1f", n / 1_000_000)}M"
+            n >= 1_000 -> "${(n / 1_000).toInt()}K"
             else -> n.toInt().toString()
         }
     }

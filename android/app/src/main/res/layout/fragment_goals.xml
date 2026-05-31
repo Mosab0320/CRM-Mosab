@@ -36,7 +36,7 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                        android:text="💰 عمولة الشهر" android:textSize="14sp" android:textStyle="bold"
+                        android:text="💰 Monthly Commission" android:textSize="14sp" android:textStyle="bold"
                         android:textColor="@color/text_primary"/>
                     <TextView android:id="@+id/tv_comm_m_pct"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                     android:max="100" android:progress="0" android:layout_marginBottom="8dp"/>
                 <TextView android:id="@+id/tv_comm_m_detail"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="0 / 0 ج.م" android:textSize="12sp" android:textColor="@color/text_tertiary"/>
+                    android:text="0 / 0 EGP" android:textSize="12sp" android:textColor="@color/text_tertiary"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -67,7 +67,7 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                        android:text="🤝 صفقات الشهر" android:textSize="14sp" android:textStyle="bold"
+                        android:text="🤝 Monthly Deals" android:textSize="14sp" android:textStyle="bold"
                         android:textColor="@color/text_primary"/>
                     <TextView android:id="@+id/tv_deals_m_pct"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
                     android:max="100" android:progress="0" android:layout_marginBottom="8dp"/>
                 <TextView android:id="@+id/tv_deals_m_detail"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="0 / 0 صفقة" android:textSize="12sp" android:textColor="@color/text_tertiary"/>
+                    android:text="0 / 0 deals" android:textSize="12sp" android:textColor="@color/text_tertiary"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -98,7 +98,7 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                        android:text="👥 ليدز الشهر" android:textSize="14sp" android:textStyle="bold"
+                        android:text="👥 Monthly Leads" android:textSize="14sp" android:textStyle="bold"
                         android:textColor="@color/text_primary"/>
                     <TextView android:id="@+id/tv_leads_m_pct"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                     android:max="100" android:progress="0" android:layout_marginBottom="8dp"/>
                 <TextView android:id="@+id/tv_leads_m_detail"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="0 / 0 ليد" android:textSize="12sp" android:textColor="@color/text_tertiary"/>
+                    android:text="0 / 0 leads" android:textSize="12sp" android:textColor="@color/text_tertiary"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -129,7 +129,7 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                        android:text="💰 عمولة السنة" android:textSize="14sp" android:textStyle="bold"
+                        android:text="💰 Annual Commission" android:textSize="14sp" android:textStyle="bold"
                         android:textColor="@color/text_primary"/>
                     <TextView android:id="@+id/tv_comm_y_pct"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
                     android:max="100" android:progress="0" android:layout_marginBottom="8dp"/>
                 <TextView android:id="@+id/tv_comm_y_detail"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="0 / 0 ج.م" android:textSize="12sp" android:textColor="@color/text_tertiary"/>
+                    android:text="0 / 0 EGP" android:textSize="12sp" android:textColor="@color/text_tertiary"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
@@ -160,7 +160,7 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="horizontal" android:gravity="center_vertical" android:layout_marginBottom="8dp">
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1"
-                        android:text="🤝 صفقات السنة" android:textSize="14sp" android:textStyle="bold"
+                        android:text="🤝 Annual Deals" android:textSize="14sp" android:textStyle="bold"
                         android:textColor="@color/text_primary"/>
                     <TextView android:id="@+id/tv_deals_y_pct"
                         android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -173,7 +173,7 @@
                     android:max="100" android:progress="0" android:layout_marginBottom="8dp"/>
                 <TextView android:id="@+id/tv_deals_y_detail"
                     android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="0 / 0 صفقة" android:textSize="12sp" android:textColor="@color/text_tertiary"/>
+                    android:text="0 / 0 deals" android:textSize="12sp" android:textColor="@color/text_tertiary"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

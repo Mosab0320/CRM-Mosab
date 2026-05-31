@@ -8,8 +8,8 @@ data class CrmTask(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
     val title: String = "",
-    val type: String = "مكالمة", // مكالمة / معاينة / اجتماع / متابعة / أوراق وعقود / تسجيل
-    val priority: String = "عادية", // عادية / مهمة / عاجلة
+    val type: String = "Call", // Call / Viewing / Meeting / Follow-up / Contracts / Register
+    val priority: String = "Normal", // Normal / Important / Urgent
     val date: String = "",
     val client: String = "",
     val project: String = "",
