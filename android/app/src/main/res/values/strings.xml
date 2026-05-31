@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OffPlan Pro</string>
+    <string name="app_subtitle">CRM العقارات</string>
+
+    <!-- Navigation -->
+    <string name="nav_dashboard">لوحة التحكم</string>
+    <string name="nav_leads">العملاء</string>
+    <string name="nav_pipeline">البايبلاين</string>
+    <string name="nav_projects">المشاريع</string>
+    <string name="nav_units">الوحدات</string>
+    <string name="nav_deals">الصفقات</string>
+    <string name="nav_tasks">المهام</string>
+    <string name="nav_followups">المتابعات</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_title">لوحة التحكم</string>
+    <string name="monthly_commission">العمولة الشهرية</string>
+    <string name="deals_this_month">صفقات الشهر</string>
+    <string name="active_leads">ليدز نشطة</string>
+    <string name="overdue_tasks">مهام متأخرة</string>
+    <string name="hot_leads">الليدز الساخنة</string>
+    <string name="recent_activity">آخر النشاطات</string>
+    <string name="upcoming_tasks">المهام القادمة</string>
+    <string name="no_hot_leads">لا توجد ليدز ساخنة حالياً</string>
+    <string name="no_upcoming_tasks">لا توجد مهام قادمة 🎉</string>
+    <string name="egp">ج.م</string>
+    <string name="target">الهدف</string>
+    <string name="current_value">الحالي</string>
+
+    <!-- Leads -->
+    <string name="leads_title">العملاء</string>
+    <string name="add_lead">إضافة عميل</string>
+    <string name="edit_lead">تعديل عميل</string>
+    <string name="lead_name">الاسم</string>
+    <string name="lead_phone">الهاتف</string>
+    <string name="lead_type">النوع</string>
+    <string name="lead_heat">الحرارة</string>
+    <string name="lead_stage">المرحلة</string>
+    <string name="lead_budget">الميزانية</string>
+    <string name="lead_project">المشروع</string>
+    <string name="lead_unit_type">نوع الوحدة</string>
+    <string name="lead_source">المصدر</string>
+    <string name="lead_nationality">الجنسية</string>
+    <string name="lead_last_contact">آخر تواصل</string>
+    <string name="lead_notes">ملاحظات</string>
+    <string name="search_leads">بحث في العملاء…</string>
+    <string name="no_leads">لا توجد عملاء</string>
+    <string name="delete_lead_confirm">حذف هذا العميل؟</string>
+    <string name="name_phone_required">الاسم والهاتف مطلوبان</string>
+    <string name="filter_all">الكل</string>
+
+    <!-- Lead Types -->
+    <string name="type_buyer">مشتري</string>
+    <string name="type_investor">مستثمر</string>
+    <string name="type_seller">بائع</string>
+
+    <!-- Heat -->
+    <string name="heat_hot">ساخن</string>
+    <string name="heat_warm">دافئ</string>
+    <string name="heat_cold">بارد</string>
+
+    <!-- Stages -->
+    <string name="stage_new">ليد جديد</string>
+    <string name="stage_contacted">تم التواصل</string>
+    <string name="stage_viewing">معاينة</string>
+    <string name="stage_offer">عرض سعر</string>
+    <string name="stage_negotiation">تفاوض</string>
+    <string name="stage_closed">تم الإغلاق</string>
+
+    <!-- Pipeline -->
+    <string name="pipeline_title">البايبلاين</string>
+    <string name="no_leads_in_stage">لا عملاء في هذه المرحلة</string>
+
+    <!-- Projects -->
+    <string name="projects_title">المشاريع</string>
+    <string name="add_project">إضافة مشروع</string>
+    <string name="project_name">اسم المشروع</string>
+    <string name="project_developer">المطور</string>
+    <string name="project_location">الموقع</string>
+    <string name="project_delivery">تسليم</string>
+    <string name="project_price_from">السعر من</string>
+    <string name="project_price_to">السعر إلى</string>
+    <string name="project_down">مقدم %</string>
+    <string name="project_years">سنوات</string>
+    <string name="project_comm">عمولة %</string>
+    <string name="project_status">الحالة</string>
+    <string name="project_desc">وصف</string>
+    <string name="no_projects">لا توجد مشاريع</string>
+
+    <!-- Units -->
+    <string name="units_title">الوحدات</string>
+    <string name="add_unit">إضافة وحدة</string>
+    <string name="unit_code">كود الوحدة</string>
+    <string name="unit_project">المشروع</string>
+    <string name="unit_type">النوع</string>
+    <string name="unit_area">المساحة م²</string>
+    <string name="unit_rooms">غرف</string>
+    <string name="unit_price">السعر</string>
+    <string name="unit_status">الحالة</string>
+    <string name="unit_desc">وصف</string>
+    <string name="no_units">لا توجد وحدات</string>
+    <string name="status_available">متاح</string>
+    <string name="status_reserved">محجوز</string>
+    <string name="status_sold">مباع</string>
+
+    <!-- Deals -->
+    <string name="deals_title">الصفقات</string>
+    <string name="add_deal">إضافة صفقة</string>
+    <string name="deal_client">العميل</string>
+    <string name="deal_project">المشروع</string>
+    <string name="deal_unit">الوحدة</string>
+    <string name="deal_type">النوع</string>
+    <string name="deal_value">قيمة الصفقة</string>
+    <string name="deal_comm_pct">عمولة %</string>
+    <string name="deal_comm_total">إجمالي العمولة</string>
+    <string name="deal_my_pct">نسبتي %</string>
+    <string name="deal_my_comm">عمولتي</string>
+    <string name="deal_date">تاريخ الصفقة</string>
+    <string name="deal_collect_date">تاريخ التحصيل</string>
+    <string name="deal_status">الحالة</string>
+    <string name="deal_contract_stage">مرحلة العقد</string>
+    <string name="deal_notes">ملاحظات</string>
+    <string name="no_deals">لا توجد صفقات</string>
+    <string name="total_commission">إجمالي العمولات</string>
+    <string name="deal_completed">مكتملة</string>
+    <string name="deal_active">جارية</string>
+    <string name="deal_cancelled">ملغاة</string>
+
+    <!-- Tasks -->
+    <string name="tasks_title">المهام</string>
+    <string name="add_task">إضافة مهمة</string>
+    <string name="edit_task">تعديل مهمة</string>
+    <string name="task_title_hint">عنوان المهمة</string>
+    <string name="task_type">النوع</string>
+    <string name="task_priority">الأولوية</string>
+    <string name="task_date">التاريخ</string>
+    <string name="task_client">العميل</string>
+    <string name="task_project">المشروع</string>
+    <string name="task_notes">ملاحظات</string>
+    <string name="tab_pending">معلقة</string>
+    <string name="tab_done">مكتملة</string>
+    <string name="no_pending_tasks">ما شاء الله! لا مهام معلقة</string>
+    <string name="no_done_tasks">لا مهام مكتملة</string>
+    <string name="mark_done">✓ تم الإنجاز</string>
+    <string name="priority_normal">عادية</string>
+    <string name="priority_important">مهمة</string>
+    <string name="priority_urgent">عاجلة</string>
+    <string name="task_type_call">مكالمة</string>
+    <string name="task_type_viewing">معاينة</string>
+    <string name="task_type_meeting">اجتماع</string>
+    <string name="task_type_followup">متابعة</string>
+    <string name="task_type_papers">أوراق وعقود</string>
+    <string name="task_type_registration">تسجيل</string>
+
+    <!-- Follow-ups -->
+    <string name="followups_title">المتابعات</string>
+    <string name="add_followup">إضافة متابعة</string>
+    <string name="followup_client">العميل</string>
+    <string name="followup_type">النوع</string>
+    <string name="followup_date">التاريخ</string>
+    <string name="followup_next_date">التاريخ التالي</string>
+    <string name="followup_notes">ملاحظات</string>
+    <string name="followup_status">الحالة</string>
+    <string name="no_followups">لا توجد متابعات</string>
+    <string name="status_pending">معلقة</string>
+    <string name="status_done">مكتملة</string>
+    <string name="mark_followup_done">✓ تم</string>
+
+    <!-- Common -->
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    <string name="delete">حذف</string>
+    <string name="edit">تعديل</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="required_fields">يرجى ملء الحقول المطلوبة</string>
+    <string name="late">متأخرة</string>
+    <string name="no_data">لا بيانات</string>
+    <string name="broker_name">اسم الوسيط</string>
+    <string name="any_project">أي مشروع</string>
+    <string name="advance">التالي →</string>
+    <string name="add_call">📞</string>
+    <string name="filter">تصفية</string>
+    <string name="all_projects">كل المشاريع</string>
+    <string name="all_types">كل الأنواع</string>
+    <string name="all_statuses">كل الحالات</string>
+    <string name="all_stages">كل المراحل</string>
+    <string name="all_heats">كل الحرارة</string>
+    <string name="clients">عميل</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/nav_dashboard" android:title="@string/nav_dashboard" android:icon="@android:drawable/ic_menu_compass"/>
+    <item android:id="@+id/nav_leads" android:title="@string/nav_leads" android:icon="@android:drawable/ic_menu_myplaces"/>
+    <item android:id="@+id/nav_pipeline" android:title="@string/nav_pipeline" android:icon="@android:drawable/ic_menu_sort_by_size"/>
+    <item android:id="@+id/nav_projects" android:title="@string/nav_projects" android:icon="@android:drawable/ic_menu_mapmode"/>
+    <item android:id="@+id/nav_units" android:title="@string/nav_units" android:icon="@android:drawable/ic_menu_gallery"/>
+    <item android:id="@+id/nav_deals" android:title="@string/nav_deals" android:icon="@android:drawable/ic_menu_manage"/>
+    <item android:id="@+id/nav_tasks" android:title="@string/nav_tasks" android:icon="@android:drawable/ic_menu_agenda"/>
+    <item android:id="@+id/nav_followups" android:title="@string/nav_followups" android:icon="@android:drawable/ic_menu_recent_history"/>
+</menu>

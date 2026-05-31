@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/surface_variant"
+    android:layoutDirection="rtl">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="إضافة صفقة"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="16dp" />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="العميل *" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <EditText android:id="@+id/et_client"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+                    android:padding="12dp" android:textSize="13sp" android:inputType="text"
+                    android:hint="اسم العميل" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="المشروع *" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <EditText android:id="@+id/et_project"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+                    android:padding="12dp" android:textSize="13sp" android:inputType="text"
+                    android:hint="اسم المشروع" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="الوحدة" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <EditText android:id="@+id/et_unit"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+                    android:padding="12dp" android:textSize="13sp" android:inputType="text"
+                    android:hint="كود الوحدة" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="الحالة" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <Spinner android:id="@+id/spinner_status"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="قيمة الصفقة (ج.م) *" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:layout_marginBottom="4dp" />
+        <EditText android:id="@+id/et_value"
+            android:layout_width="match_parent" android:layout_height="48dp"
+            android:background="@drawable/bg_input"
+            android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+            android:padding="12dp" android:textSize="13sp" android:inputType="numberDecimal"
+            android:hint="0" android:layout_marginBottom="12dp" />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="عمولة %" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <EditText android:id="@+id/et_comm_pct"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+                    android:padding="12dp" android:textSize="13sp" android:inputType="numberDecimal"
+                    android:hint="3" android:text="3" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="نسبتي %" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <EditText android:id="@+id/et_my_pct"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+                    android:padding="12dp" android:textSize="13sp" android:inputType="numberDecimal"
+                    android:hint="100" android:text="100" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="16dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="إجمالي العمولة" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <TextView android:id="@+id/tv_comm_total"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:textColor="@color/gold" android:gravity="center_vertical|end"
+                    android:padding="12dp" android:textSize="13sp" android:textStyle="bold"
+                    android:text="0 ج.م" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="عمولتي" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <TextView android:id="@+id/tv_my_comm"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:textColor="@color/emerald" android:gravity="center_vertical|end"
+                    android:padding="12dp" android:textSize="13sp" android:textStyle="bold"
+                    android:text="0 ج.م" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/btn_cancel"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp" android:layout_height="48dp"
+                android:layout_weight="1" android:layout_marginEnd="8dp"
+                android:text="إلغاء" android:textColor="@color/text_secondary" />
+            <Button android:id="@+id/btn_save"
+                android:layout_width="0dp" android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="حفظ" android:textColor="@color/background"
+                android:backgroundTint="@color/gold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
