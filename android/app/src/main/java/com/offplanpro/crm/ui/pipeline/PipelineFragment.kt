@@ -114,7 +114,7 @@ class PipelineFragment : Fragment() {
             setTextColor(Color.parseColor("#E2B96A"))
         }
         val heatView = TextView(requireContext()).apply {
-            text = when(lead.heat) { "hot" -> "🔥 ساخن"; "warm" -> "🟡 دافئ"; else -> "🔵 بارد" }
+            text = when(lead.heat) { "hot" -> "🔥 Hot"; "warm" -> "🟡 Warm"; else -> "🔵 Cold" }
             textSize = 11f
             setTextColor(Color.parseColor("#8896B0"))
         }
@@ -131,7 +131,7 @@ class PipelineFragment : Fragment() {
 
     private fun showStageChangeDialog(lead: Lead) {
         val dialog = android.app.AlertDialog.Builder(requireContext())
-            .setTitle("تغيير مرحلة ${lead.name}")
+            .setTitle("Change Stage for ${lead.name}")
             .setItems(stages.toTypedArray()) { _, which ->
                 val newStage = stages[which]
                 if (newStage != lead.stage) {

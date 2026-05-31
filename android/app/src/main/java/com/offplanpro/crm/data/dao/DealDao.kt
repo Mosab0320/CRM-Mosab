@@ -12,10 +12,10 @@ interface DealDao {
     @Query("SELECT * FROM deals ORDER BY id DESC")
     suspend fun getAllDealsList(): List<Deal>
 
-    @Query("SELECT COUNT(*) FROM deals WHERE status = 'مكتملة'")
+    @Query("SELECT COUNT(*) FROM deals WHERE status = 'Completed'")
     suspend fun getCompletedDealsCount(): Int
 
-    @Query("SELECT SUM(myComm) FROM deals WHERE status != 'ملغاة'")
+    @Query("SELECT SUM(myComm) FROM deals WHERE status != 'Cancelled'")
     suspend fun getTotalCommission(): Double?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
