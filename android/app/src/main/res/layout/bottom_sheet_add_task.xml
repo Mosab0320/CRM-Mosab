@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/surface_variant"
+    android:layoutDirection="ltr">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tv_sheet_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Task"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="16dp" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Task Title *" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:layout_marginBottom="4dp" />
+        <EditText android:id="@+id/et_title"
+            android:layout_width="match_parent" android:layout_height="48dp"
+            android:background="@drawable/bg_input"
+            android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+            android:padding="12dp" android:textSize="13sp" android:inputType="text"
+            android:hint="Task title" android:layout_marginBottom="12dp" />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Type" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <Spinner android:id="@+id/spinner_type"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Priority" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <Spinner android:id="@+id/spinner_priority"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Date & Time" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:layout_marginBottom="4dp" />
+        <EditText android:id="@+id/et_date"
+            android:layout_width="match_parent" android:layout_height="48dp"
+            android:background="@drawable/bg_input"
+            android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+            android:padding="12dp" android:textSize="13sp" android:inputType="text"
+            android:hint="YYYY-MM-DD" android:layout_marginBottom="12dp"
+            android:focusable="true" android:clickable="true" />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginEnd="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Client" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <EditText android:id="@+id/et_client"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+                    android:padding="12dp" android:textSize="13sp" android:inputType="text"
+                    android:hint="Client name" />
+            </LinearLayout>
+            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                android:layout_weight="1" android:orientation="vertical" android:layout_marginStart="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Project" android:textSize="12sp" android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="4dp" />
+                <EditText android:id="@+id/et_project"
+                    android:layout_width="match_parent" android:layout_height="48dp"
+                    android:background="@drawable/bg_input"
+                    android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+                    android:padding="12dp" android:textSize="13sp" android:inputType="text"
+                    android:hint="Project name" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Notes" android:textSize="12sp" android:textColor="@color/text_secondary"
+            android:layout_marginBottom="4dp" />
+        <EditText android:id="@+id/et_notes"
+            android:layout_width="match_parent" android:layout_height="80dp"
+            android:background="@drawable/bg_input"
+            android:textColor="@color/text_primary" android:textColorHint="@color/text_tertiary"
+            android:padding="12dp" android:textSize="13sp" android:inputType="textMultiLine"
+            android:gravity="top|end" android:hint="Additional notes"
+            android:layout_marginBottom="16dp" />
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button android:id="@+id/btn_cancel"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp" android:layout_height="48dp"
+                android:layout_weight="1" android:layout_marginEnd="8dp"
+                android:text="Cancel" android:textColor="@color/text_secondary" />
+            <Button android:id="@+id/btn_save"
+                android:layout_width="0dp" android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="Save" android:textColor="@color/background"
+                android:backgroundTint="@color/gold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
